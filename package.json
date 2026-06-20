@@ -1,0 +1,20 @@
+{
+  "name": "smollink",
+  "version": "1.0.0",
+  "description": "URL shortener thing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/riddhima2b/smollink.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/riddhima2b/smollink/issues"
+  },
+  "homepage": "https://github.com/riddhima2b/smollink#readme"
+}
