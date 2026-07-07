@@ -4,6 +4,10 @@ function encodeBase62(num)
     
     let hashed_str = '';
 
+    if (num < 0) throw new Error('encodeBase62: input must be non-negative');
+
+    if(num == 0) return s[0];
+
     while(num>0)
     {
         hashed_str = s[num % 62] + hashed_str;
@@ -11,4 +15,4 @@ function encodeBase62(num)
     }
     return hashed_str;
 }
-console.log(encodeBase62(160000917));
+console.log(encodeBase62(-10));
