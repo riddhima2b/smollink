@@ -15,4 +15,4 @@ function encodeBase62(num)
     }
     return hashed_str;
 }
-console.log(encodeBase62(-10));
+module.exports = {encodeBase62};
