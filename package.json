@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/riddhima2b/smollink/issues"
   },
-  "homepage": "https://github.com/riddhima2b/smollink#readme"
+  "homepage": "https://github.com/riddhima2b/smollink#readme",
+  "dependencies": {
+    "cors": "^2.8.6"
+  }
 }
