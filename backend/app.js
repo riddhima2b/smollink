@@ -2,7 +2,10 @@ const express = require('express');
 const cors = require('cors');
 require("dotenv").config();
 const app = express();
+app.use(express.json());
 const PORT = process.env.B_PORT;
+const base_url = process.env.BASE_URL;
+const linkService = require('./src/services/link.service');
 
 app.use(cors({
   origin: ["http://localhost:5173", "http://localhost:3001"],
@@ -13,7 +16,21 @@ app.get('/', (req, res) => {
     res.send('Hello from the backend!');
     }
 );
+
+app.post('/api/shorten', async (req, res) => {
+
+    const url1 = req.body.url;
+
+    if (!url1) {
+        return res.status(400).json({ error: 'URL is required' });
+    }
+    
+    const link = await linkService.createShortUrl(url1);
+    
+    return res.status(200).json({ shortUrl: base_url + link.shortCode });
+
+
+});
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-

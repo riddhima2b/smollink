@@ -1,6 +1,5 @@
-
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
@@ -10,8 +9,8 @@ datasource db {
 }
 
 model Link {
-  id Int @id @default(autoincrement())
-  shortCode String? @unique
-  longUrl String @unique
+  id        Int      @id @default(autoincrement())
+  shortCode String?   @unique
+  longUrl   String   @unique
   createdAt DateTime @default(now())
 }

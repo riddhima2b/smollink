@@ -1,5 +1,5 @@
 const Base62 = require('../utils/base62');
-const prismaclient = require('../lib/prisma');
+const prismaclient = require('../../lib/prisma');
 
 async function fetchUrl(url)
 {
@@ -33,3 +33,5 @@ async function createShortUrl(url) {
     return shortLink;
     
 }
+
+module.exports = {fetchUrl, createShortUrl};
