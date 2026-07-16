@@ -34,4 +34,12 @@ async function createShortUrl(url) {
     
 }
 
-module.exports = {fetchUrl, createShortUrl};
+async function getUrl(shortCode){
+
+    const link = await prismaclient.primsa.link.findUnique({
+        where: { shortCode: shortCode },
+    })
+    return link;
+}
+
+module.exports = {fetchUrl, createShortUrl,getUrl};

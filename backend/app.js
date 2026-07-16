@@ -31,6 +31,19 @@ app.post('/api/shorten', async (req, res) => {
 
 
 });
+
+app.get('/:shortCode', async (req, res) => {
+
+    const shortCode = req.params.shortCode;
+    const link = await linkService.getUrl(shortCode);
+
+    if (!link) {
+        return res.status(404).json({ error: 'Short URL not found' });
+    }
+
+    return res.redirect(link.longUrl);
+
+})
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
