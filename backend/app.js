@@ -6,6 +6,7 @@ app.use(express.json());
 const PORT = process.env.B_PORT;
 const base_url = process.env.BASE_URL;
 const linkService = require('./src/services/link.service');
+const rateLimit = require('./middleware/rateLimit');
 
 app.use(cors({
   origin: ["http://localhost:5173", "http://localhost:3001"],
@@ -17,7 +18,7 @@ app.get('/', (req, res) => {
     }
 );
 
-app.post('/api/shorten', async (req, res) => {
+app.post('/api/shorten',rateLimit, async (req, res) => {
 
     const url1 = req.body.url;
 
@@ -28,7 +29,6 @@ app.post('/api/shorten', async (req, res) => {
     const link = await linkService.createShortUrl(url1);
     
     return res.status(200).json({ shortUrl: base_url + link.shortCode });
-
 
 });
 
