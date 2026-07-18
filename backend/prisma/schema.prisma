@@ -5,23 +5,22 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model User {
-  userId     String   @id @default(uuid())
-  email      String   @unique
+  userId    String   @id @default(uuid())
+  email     String   @unique
   name      String
-  password  String 
-  link      Link[] 
+  password  String
   createdAt DateTime @default(now())
+  link      Link[]
 }
 
 model Link {
   id        Int      @id @default(autoincrement())
-  userId    String? 
-  user      User?    @relation(fields: [userId], references: [userId])
   shortCode String?  @unique
   longUrl   String   @unique
   createdAt DateTime @default(now())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [userId])
 }
