@@ -11,4 +11,4 @@ class AuthenticationError extends Error {
     }
 }
 
-module.exports = { ValidationError };
+module.exports = { ValidationError, AuthenticationError};
