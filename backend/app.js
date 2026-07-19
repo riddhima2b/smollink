@@ -7,7 +7,7 @@ const PORT = process.env.B_PORT;
 const base_url = process.env.BASE_URL;
 const linkService = require('./src/services/link.service');
 const rateLimit = require('./middleware/rateLimit');
-const {register} = require('./src/controllers/users');
+const {register, login} = require('./src/controllers/users');
 
 app.use(cors({
   origin: ["http://localhost:5173", "http://localhost:3001"],
@@ -20,7 +20,7 @@ app.get('/', (req, res) => {
 );
 
 app.post('/api/register',register);
-
+app.post('/api/login', login);
 app.post('/api/shorten',rateLimit, async (req, res) => {
 
     const url1 = req.body.url;

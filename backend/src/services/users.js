@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const prismaclient = require('../../lib/prisma');
 const jwtSecret = process.env.JWT_SECRET;
 const {ValidationError} = require('../utils/errors');
+const { AuthenticationError } = require('../utils/errors');
 
 const registerUser = async (email, password, name) => {
     if (!email || !password) {
@@ -52,4 +53,29 @@ const registerUser = async (email, password, name) => {
     return newUser;
 };
 
-module.exports = { registerUser };
+const loginUser = async (email, password) => {
+
+    if(!email || !password) {
+        throw new ValidationError('All fields are required');
+    }
+
+    const user = await prismaclient.primsa.user.findUnique({
+        where: {email: email},
+    });
+    if (!user) {
+        throw new AuthenticationError('Invalid email or password');
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if(!isPasswordValid) {
+        throw new AuthenticationError('Invalid email or password');
+    }
+
+    const token = jwt.sign({userId: user.userId}, jwtSecret, {expiresIn: '1h'});
+    
+    const {password: _, ...userWithoutPassword} = user;
+    return {user: userWithoutPassword, token};
+
+};
+
+module.exports = { registerUser, loginUser };
