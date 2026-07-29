@@ -9,7 +9,7 @@ async function fetchUrl(url)
 
     return link;
 }
-async function createShortUrl(url) {
+async function createShortUrl(url,userId) {
 
     const existingLink = await fetchUrl(url);
     if(existingLink) {
@@ -19,6 +19,7 @@ async function createShortUrl(url) {
     const newLink = await prismaclient.primsa.link.create({
             data: {
                 longUrl: url,
+                userId: userId,
             },
         });
         
