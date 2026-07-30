@@ -1,5 +1,6 @@
 const Base62 = require('../utils/base62');
 const prismaclient = require('../../lib/prisma');
+const { ValidationError } = require('../utils/errors');
 
 async function fetchUrl(url)
 {
@@ -10,6 +11,10 @@ async function fetchUrl(url)
     return link;
 }
 async function createShortUrl(url,userId) {
+
+    if (!url || typeof url !== 'string') {
+        throw new ValidationError('URL is required');
+    }
 
     const existingLink = await fetchUrl(url);
     if(existingLink) {

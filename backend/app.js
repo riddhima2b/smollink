@@ -8,7 +8,10 @@ const base_url = process.env.BASE_URL;
 const linkService = require('./src/services/link.service');
 const rateLimit = require('./middleware/rateLimit');
 const {register, login} = require('./src/controllers/users');
-
+const { shortenController } = require('./src/controllers/link.service');
+const optionalAuth = require('./middleware/middleware').optionalAuth;
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 app.use(cors({
   origin: ["http://localhost:5173", "http://localhost:3001"],
   credentials: true,
@@ -21,20 +24,7 @@ app.get('/', (req, res) => {
 
 app.post('/api/register',register);
 app.post('/api/login', login);
-app.post('/api/shorten',rateLimit, async (req, res) => {
-
-    const url1 = req.body.url;
-
-    if (!url1) {
-        return res.status(400).json({ error: 'URL is required' });
-    }
-    
-    const link = await linkService.createShortUrl(url1);
-    
-    return res.status(200).json({ shortUrl: base_url + link.shortCode });
-
-});
-
+app.post('/api/shorten', optionalAuth, rateLimit, shortenController);
 app.get('/:shortCode', async (req, res) => {
 
     const shortCode = req.params.shortCode;
