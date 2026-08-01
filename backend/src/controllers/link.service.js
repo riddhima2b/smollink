@@ -15,8 +15,8 @@ const shortenController = async (req, res) => {
       const link = await createShortUrl(url, userId);
   
       return res.status(201).json({
-        shortUrl: `${baseUrl}${link.shortCode}`,
-        longUrl: link.longUrl,
+        shortUrl: `${baseUrl}${link.shortCode}`
+        
       });
     } catch (err) {
       if (err instanceof ValidationError) {
