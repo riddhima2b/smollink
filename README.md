@@ -1,2 +1,2 @@
 # smollink
-URL shortener thing 
+URL shortener 
