@@ -30,20 +30,29 @@ const LandingPage = () => {
 
     return(
         <>
-            <div className="min-h-screen w-full bg-white-400">
-                <p className="p-6 grid grid-flow-col justify-items-center-safe font-semibold text-4xl font-serif text-black">Hello!</p>
+            <div className="relative min-h-screen overflow-hidden bg-[#0B0A12] font-serif brightness-100">
+            
                 <br/><br/>
-
-                <p className="p-4 grid grid-cols-1 justify-center-safe font-serif text-2xl text-black">
-                    Welcome to SMOL-LINK, a simple and efficient URL shortening service that allows you to convert long URLs into shorter, more manageable links.
+                <h1 className="p-4 text-center text-6xl text-[#F5F3EF]">Long URLs are </h1>
+                <h1 className="italic text-center text-6xl text-[#FF4D82]" >
+                    booooring!
+                </h1>
+                <br/><br/>
+                <p className="text-xl grid justify-center text-cyan-200 brightness-100">
+                    Paste one below, and we'll make it smoll for you!
                 </p>
 
                 <br/><br/>
-                <form className="flex flex-col items-center" onSubmit={smollify}>
-                    <input type="text" value={longUrl} onChange={change} className="border border-black p-2 rounded-md w-1/2 text-black" />
-                    <input type="text" value={shortUrl} readOnly className="border border-black p-2 mt-4 rounded-md text-black w-1/2"  />
-                    <button type="submit" className="border border-black p-2 mt-4 rounded-md text-black w-1/2 pointer-events-auto">Smollify</button>
-                </form>
+
+                <div className="flex-col flex items-center justify-center gap-2 px-4 py-6 p-6 rounded-md mx-auto rounded-md text-xl"> 
+                    
+                        <input type="text" value={longUrl} onChange={change} className="border border-blue-200 p-2 rounded-md w-1/2 text-white" />
+                        <input type="text" value={shortUrl} readOnly className="border border-blue-200 p-2 mt-4 rounded-md text-white w-1/2 hover-blue">
+                        </input> 
+                        <button type="submit" className="border border-lime-500 bg-lime-500 p-2 mt-4 rounded-md text-black w-1/2 pointer-events-auto" onClick ={smollify}>Smollify</button>
+                                     
+                </div>
+                
             </div>
         </>
     )
