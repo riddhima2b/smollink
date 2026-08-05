@@ -10,6 +10,7 @@ const rateLimit = require('./middleware/rateLimit');
 const {register, login} = require('./src/controllers/users');
 const { shortenController } = require('./src/controllers/link.service');
 const optionalAuth = require('./middleware/middleware').optionalAuth;
+const requireAuth = require('./middleware/middleware').requireAuth;
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.use(cors({
