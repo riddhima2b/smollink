@@ -37,9 +37,10 @@ const LoginPage = () => {
                 </h1>            
 
                 <form className="flex flex-col items-center px-6 py-8 gap-6 mx-auto rounded-2xl border border-white w-120" onSubmit={handleLogin}>
-
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border border-blue-200 p-2 rounded-md w-100 text-white" />
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="border border-blue-200 p-2 rounded-md w-100 text-white" />
+                <h3 className="text-white text-xl"> Email </h3>
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your email" className="border border-blue-200 p-2 rounded-md w-100 text-white" />
+                    <h3 className="text-white text-xl"> Password </h3>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" className="border border-blue-200 p-2 rounded-md w-100 text-white" />
                     <button className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black w-80 pointer-events-auto hover:bg-lime-700 hover:border-lime-200" type="submit">Login</button>
 
                 </form>    
