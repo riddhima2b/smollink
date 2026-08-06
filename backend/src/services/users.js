@@ -78,4 +78,16 @@ const loginUser = async (email, password) => {
 
 };
 
-module.exports = { registerUser, loginUser };
+const getUser = async (userId) => {
+    const user = await prismaclient.primsa.user.findUnique({
+        where: {userId: userId},
+        select: {name: true, email: true, userId: true}
+    });
+
+    if(!user) {
+        throw new AuthenticationError('User not found');
+    }
+    return user;
+
+};
+module.exports = { registerUser, loginUser, getUser };

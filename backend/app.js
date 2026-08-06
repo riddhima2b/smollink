@@ -7,7 +7,7 @@ const PORT = process.env.B_PORT;
 const base_url = process.env.BASE_URL;
 const linkService = require('./src/services/link.service');
 const rateLimit = require('./middleware/rateLimit');
-const {register, login} = require('./src/controllers/users');
+const {register, login, getUserInfo} = require('./src/controllers/users');
 const { shortenController } = require('./src/controllers/link.service');
 const optionalAuth = require('./middleware/middleware').optionalAuth;
 const requireAuth = require('./middleware/middleware').requireAuth;
@@ -25,6 +25,7 @@ app.get('/', (req, res) => {
 
 app.post('/api/register',register);
 app.post('/api/login', login);
+app.get('/api/user', requireAuth, getUserInfo);
 app.post('/api/shorten', optionalAuth, rateLimit, shortenController);
 app.get('/:shortCode', async (req, res) => {
 
