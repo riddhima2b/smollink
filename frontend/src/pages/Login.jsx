@@ -31,20 +31,29 @@ const LoginPage = () => {
         <>
             <div className="relative min-h-screen overflow-hidden bg-radial bg-[#0B0A12] font-serif brightness-100 opacity-95 mb-10">
             <br/><br/><br/> 
-                <h1 className="p-10 py-6 gap-8 text-center text-[#FF4D82] text-5xl italic mb-10">
+                <h1 className="py-4 text-center text-5xl text-[#FF4D82] mb-10">
                     
-                    Get started!
+                    Welcome back! 
+                    <h1 className="py-4 italic text-center text-4xl text-[#ffffff] bg-radial" >
+                   Please log in to your account.
+                </h1>
                 </h1>            
 
-                <form className="flex flex-col items-center px-6 py-8 gap-6 mx-auto rounded-2xl border border-white w-120" onSubmit={handleLogin}>
+                <form className="flex flex-col items-center gap-4 mx-auto rounded-2xl" onSubmit={handleLogin}>
                 <h3 className="text-white text-xl"> Email </h3>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="your email" className="border border-blue-200 p-2 rounded-md w-100 text-white" />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="text-xl border border-blue-200 p-2 rounded-md w-100 text-white" />
                     <h3 className="text-white text-xl"> Password </h3>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" className="border border-blue-200 p-2 rounded-md w-100 text-white" />
-                    <button className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black w-80 pointer-events-auto hover:bg-lime-700 hover:border-lime-200" type="submit">Login</button>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" className="text-xl border border-blue-200 p-2 rounded-md w-100 text-white " />
+                    <button className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black pointer-events-auto hover:bg-lime-700 hover:border-lime-200 w-100 text-2xl" type="submit">Login</button>
 
                 </form>    
+
+                <p className="text-center items-center mx-auto py-8 text-white brightness-100 mt-4 italic text-md-xl">
+                        Don't have an account? <a href="/register" className="text-pink-600 hover:underline">Sign up</a> ➡️
+                    </p>
             </div>
+            <footer className="font-serif absolute bottom-0 w-full text-center py-4 text-white"><a href="https://github.com/riddhima2b" target="_blank" rel="noopener noreferrer" >© Riddhima, 2026</a></footer>
+
         </>
     )
 
