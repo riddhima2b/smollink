@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import CopyButton from "../components/CopyButton";
 const LandingPage = () => {
 
@@ -32,7 +33,11 @@ const LandingPage = () => {
     return(
         <>
             <div className="relative min-h-screen overflow-hidden bg-radial bg-[#0B0A12] font-serif brightness-100 opacity-95">
-            
+
+                <h1 className="flex justify px-8 py-4 text-3xl font-bold text-white">
+                    
+                    <Link to="/register">S <span className="text-[#69ff4f]">.</span></Link>
+                </h1>
                 <br/><br/><br/>
                 <h1 className="py-4 text-center text-6xl text-[#F5F3EF]">Long URLs are </h1>
                 <h1 className="italic text-center text-6xl text-[#FF4D82] bg-radial" >

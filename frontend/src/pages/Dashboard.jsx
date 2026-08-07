@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
 const DashboardPage = () => {
 
     const [userName, setUser] = useState(null);
@@ -27,19 +28,7 @@ const DashboardPage = () => {
     return(
         <div className="min-h-screen bg-[#1d1c22] text-[#f5f1eb] font-serif">
 
-            <nav className="border-b border-[#f5f1eb]/20 px-10 py-5">
-                <div className="flex items-center justify-between">
-                <h1 className="text-2xl font-bold">
-                    S <span className="text-[#69ff4f]">.</span>
-                </h1>
-
-                <div className="flex gap-8 text-md">
-                    <span>My Links</span>
-                    <span>Analytics</span>
-                    <span className="text-[#69ff4f]">Logout</span>
-                </div>
-                </div>
-            </nav>
+            <Navbar/>
 
             <main className="mx-auto max-w-6xl px-10 py-20">
 
@@ -48,10 +37,10 @@ const DashboardPage = () => {
                 </h2>
 
                 <p className="mt-4 text-xl text-[#9debf2]">
-                Let's make some URLs tiny.
+                Let's make some URLs disappear!
                 </p>
 
-                {/* cards */}
+               
 
             </main>
             </div>
