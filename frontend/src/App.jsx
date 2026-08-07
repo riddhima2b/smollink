@@ -1,7 +1,7 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./index.css";
-import LandingPage from "./pages/landingPage";
+import Dashboard from "./pages/Dashboard";
+import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/Login";
 import Registration from "./pages/Register";
 function App() {
@@ -13,6 +13,7 @@ function App() {
     <Route path="/" element={<LandingPage />} />
     <Route path="/login" element={<LoginPage />} />
     <Route path="/register" element={<Registration />} />
+    <Route path="/dashboard" element={<Dashboard />}/>
     </Routes>    
     </>
   )
