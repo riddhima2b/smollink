@@ -7,7 +7,7 @@ const PORT = process.env.B_PORT;
 const base_url = process.env.BASE_URL;
 const linkService = require('./src/services/link.service');
 const rateLimit = require('./middleware/rateLimit');
-const {register, login, getUserInfo} = require('./src/controllers/users');
+const {register, login, getUserInfo, logout } = require('./src/controllers/users');
 const { shortenController } = require('./src/controllers/link.service');
 const optionalAuth = require('./middleware/middleware').optionalAuth;
 const requireAuth = require('./middleware/middleware').requireAuth;
@@ -39,6 +39,7 @@ app.get('/:shortCode', async (req, res) => {
     return res.redirect(link.longUrl);
 
 })
+app.post('/api/logout', logout);
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
