@@ -30,36 +30,37 @@ async function createShortUrl(url,userId,customSlug) {
             throw new ValidationError('This custom keyword is already taken');
         }
 
-        return await prismaclient.primsa.link.create({
+        const newLink = await prismaclient.primsa.link.create({
             data: {
                 longUrl: url,
                 userId: userId,
                 customSlug: customSlug || null,
                 },
             });
+            const shortUrl = Base62.encodeBase62(newLink.id);
+            return await prismaclient.primsa.link.update({
+                where: { id: newLink.id },
+                data: { shortCode: shortUrl },
+            });
     }
     const existingLink = await fetchUrl(url);
     if(existingLink) {
         return existingLink;
     }
+        
     const newLink = await prismaclient.primsa.link.create({
         data: {
             longUrl: url,
             userId: userId,
-        }
-    }
-    );
-        
+        },
+    });
     const shortUrl = Base62.encodeBase62(newLink.id);
 
-    const shortLink = await prismaclient.primsa.link.update({
+    return await prismaclient.primsa.link.update({
         
         where: { id: newLink.id },
         data: { shortCode: shortUrl },
-    });
-
-    return shortLink;
-    
+    });    
 }
 
 async function getUrl(shortCode){

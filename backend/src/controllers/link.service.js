@@ -4,7 +4,7 @@ const baseUrl = process.env.BASE_URL;
 
 const shortenController = async (req, res) => {
     try {
-      const { url } = req.body || {};
+      const { url, customSlug } = req.body || {};
   
       if (!url) {
         return res.status(400).json({ error: 'URL is required' });
@@ -12,13 +12,15 @@ const shortenController = async (req, res) => {
   
       const userId = req.user?.userId ?? null;
   
-      const link = await createShortUrl(url, userId);
+      const link = await createShortUrl(url, userId, customSlug);
   
       return res.status(201).json({
-        shortUrl: `${baseUrl}${link.shortCode}`
-        
+        shortUrl: customSlug
+        ?`${baseUrl}${link.customSlug}/${link.shortCode}`
+        :`${baseUrl}${link.shortCode}`
       });
     } catch (err) {
+      console.error(err);
       if (err instanceof ValidationError) {
         return res.status(400).json({ error: err.message });
       }
