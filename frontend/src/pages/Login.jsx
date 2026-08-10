@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import Spinner from "../components/Spinner";
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password,setPassword] = useState("");
     const navigate = useNavigate();
+    const [isRedirecting, setIsRedirecting] = useState(false);
+
 
 
     const handleLogin = async (e) => {
@@ -21,15 +23,15 @@ const LoginPage = () => {
                 withCredentials: true
             });
             alert('Login successful!');
-            navigate('/dashboard');
-
+            setIsRedirecting(true);
+            setTimeout(() => navigate('/dashboard'), 1500);
             console.log(response.data.user);
         }
         catch(error) {
             console.error('Error:', error);
         }
     }
-
+    if (isRedirecting) return <Spinner />;
     return(
 
         <>
