@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CopyButton from "../components/CopyButton";
 import Navbar from "../components/Navbar";
+import Toast from "../components/Toast";
 const DashboardPage = () => {
 
     const [userName, setUser] = useState(null);
@@ -9,6 +10,8 @@ const DashboardPage = () => {
     const [shortUrl, setShortUrl] = useState("");
     const [slug, setSlug] = useState("");
     const [getId, setUserId] = useState(null);
+    const [toast, setToast] = useState(null);
+
     useEffect(() => {
         const getUser = async () => {
             try{
@@ -23,7 +26,7 @@ const DashboardPage = () => {
             }
             catch(Error)
             {
-                console.error('Error:', Error);
+                setToast(Error.response?.data?.error || "Something went wrong. Please try again.");
             }
         }
         getUser();
@@ -55,7 +58,7 @@ const DashboardPage = () => {
             }, 500);
         }
         catch (error) {
-            console.error('Error:', error);
+            setToast(error.response?.data?.error || "Something went wrong. Please try again.");
         }
     };
     
@@ -113,6 +116,8 @@ const DashboardPage = () => {
 
             </main>
             <footer className="absolute bottom-0 w-full text-center py-4 text-white"><a href="https://github.com/riddhima2b" target="_blank" rel="noopener noreferrer" >© Riddhima, 2026</a></footer>
+            <Toast message={toast} onClose={() => setToast(null)} />
+            
         </div>
     )
 }

@@ -23,10 +23,10 @@ const LoginPage = () => {
                 },
                 withCredentials: true
             });
-            alert('Login successful!');
             setIsRedirecting(true);
             setTimeout(() => navigate('/dashboard'), 1500);
             console.log(response.data.user);
+            setToast('Login successful! Redirecting to dashboard...');
         }
         catch(error) {
             setToast(error.response.data.message || 'Login failed. Please try again.');
@@ -36,6 +36,7 @@ const LoginPage = () => {
     return(
 
         <>
+            <Toast message={toast} onClose={() => setToast(null)} />
             <div className="relative min-h-screen overflow-hidden bg-radial bg-[#0B0A12] font-serif brightness-100 opacity-95 mb-10">
                 <h1 className="flex justify px-8 py-4 text-3xl font-bold text-white">
                     
