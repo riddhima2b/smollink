@@ -65,34 +65,55 @@ const DashboardPage = () => {
 
             <Navbar/>
 
-            <main className="mx-auto max-w-6xl px-10 py-10">
+            <main className="mx-auto max-w-7xl px-6 py-6">
 
-                <h2 className="font-serif text-6xl font-bold">
-                Hey <span className="text-[#ff4f87] ">{userName || 'User'}!</span>
+                <h2 className="font-serif text-5xl font-bold">
+                Hey <span className="text-[#ff4f87]">{userName || 'User'}!</span>
                 </h2>
 
-                <div className="flex-col flex items-center justify-center gap-2 px-4 py-6 p-6 mx-auto rounded-md"> 
+                <div className="flex-col flex items-center justify-center gap-5 p-4 mx-auto rounded-md"> 
 
-                <p className="mt-4 py-6 text-2xl text-[#9debf2]">
+                <p className="text-2xl text-white font-serif text-center">
                     Let's make some URLs disappear!
                 </p>
                     
-                    <input type="text" value={longUrl} onChange={change} placeholder="https://example.com/your/very/long/url/here" className="border border-blue-200 p-2 rounded-md w-120 text-white" />
+                <form onSubmit={smollify} className="flex flex-col items-center justify-center gap-4 py-6">
+                    <input type="text" value={longUrl} onChange={change} placeholder="https://example.com/your/very/long/url/here" className="border border-blue-200 rounded-md w-120 text-white p-2" />
                  
-                    <input type="text" value={slug} onChange={(slugChange)} placeholder="Add a custom key!" className="border border-blue-200 p-2 rounded-md w-120 text-white" />
-                  
-                    <div className="flex items-center gap-2 w-120 border border-cyan-300 bg-radial bg-[#087f99] p-2 rounded-md">
-                   
+                    <div className="space-x-5">
+                    <input type="text" value={slug} onChange={(slugChange)} placeholder="Add a custom link name!" className="border border-blue-200 p-2 rounded-md w-75 text-white" />
+                    <button id ="smollink-button" className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black w-40 pointer-events-auto hover:bg-lime-700 hover:border-lime-200" onClick ={smollify}>Smollify!</button>
+                    </div>
+                    <div className="my-3 flex items-center w-120 border border-cyan-300 bg-radial bg-[#087f99] p-2 rounded-md">
                     <input type="text" value={shortUrl} readOnly placeholder = "shortened-url/here" className=" text-white flex-1"/>
                     <CopyButton text={shortUrl} />
                     </div>
                    
-                    <button id ="smollink-button" className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black w-120 pointer-events-auto hover:bg-lime-700 hover:border-lime-200" onClick ={smollify}>Smollify!</button>
+                </form>
+
+                <p className="py-6 text-xl ">HOW IT WORKS ✨</p>
+                <div className="flex items-start justify-center rounded-md gap-16 text-xl">
+                    <div className="text-center">
+                        <span className="text-[#ff4f87]">01</span>
+                        <p className="py-4 text-[#69ff4f]">Paste the URL</p>
+                    </div>                   
+                    <div className="text-center">
+                        <span className="text-[#ff4f87]">02</span>
+                        <p className="py-4 text-[#69ff4f]">Customise (optional)</p>
+                    </div>                   
+                    <div className="text-center">
+                        <span className="text-[#ff4f87]">03</span>
+                        <p className="py-4 text-[#69ff4f]"> Copy and Share!</p>
+                    </div>                   
+
+                </div>
+                    
                 </div>
                
 
             </main>
-            </div>
+            <footer className="absolute bottom-0 w-full text-center py-4 text-white"><a href="https://github.com/riddhima2b" target="_blank" rel="noopener noreferrer" >© Riddhima, 2026</a></footer>
+        </div>
     )
 }
 export default DashboardPage;
