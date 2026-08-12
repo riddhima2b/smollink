@@ -2,12 +2,13 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
+import Toast from "../components/Toast";
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password,setPassword] = useState("");
     const navigate = useNavigate();
     const [isRedirecting, setIsRedirecting] = useState(false);
-
+    const [toast, setToast] = useState(null);
 
 
     const handleLogin = async (e) => {
@@ -28,7 +29,7 @@ const LoginPage = () => {
             console.log(response.data.user);
         }
         catch(error) {
-            console.error('Error:', error);
+            setToast(error.response.data.message || 'Login failed. Please try again.');
         }
     }
     if (isRedirecting) return <Spinner />;
@@ -62,7 +63,7 @@ const LoginPage = () => {
                     </p>
             </div>
             <footer className="font-serif absolute bottom-0 w-full text-center py-4 text-white"><a href="https://github.com/riddhima2b" target="_blank" rel="noopener noreferrer" >© Riddhima, 2026</a></footer>
-
+            <Toast message={toast} onClose={() => setToast(null)} />
         </>
     )
 

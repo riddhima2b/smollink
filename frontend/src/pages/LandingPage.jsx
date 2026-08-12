@@ -2,11 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import CopyButton from "../components/CopyButton";
+import Toast from "../components/Toast";
 const LandingPage = () => {
 
     const [longUrl, setLongUrl] = useState("");
     const [shortUrl, setShortUrl] = useState("");
-
+    const [toast, setToast] = useState(null);
     const change = (e) => {
         setLongUrl(e.target.value);
     };
@@ -28,12 +29,13 @@ const LandingPage = () => {
             
         }
         catch (error) {
-            console.error('Error:', error);
+            setToast(error.response?.data?.error || "Something went wrong. Please try again.");
         }
     };
 
     return(
         <>
+         <Toast message={toast} onClose={() => setToast(null)} />
             <div className="relative min-h-screen overflow-hidden bg-radial bg-[#0B0A12] font-serif brightness-100 opacity-95">
 
                 <h1 className="flex justify px-8 py-4 text-3xl font-bold text-white">
@@ -67,6 +69,7 @@ const LandingPage = () => {
           
                 </div>
                 <footer className="absolute bottom-0 w-full text-center py-4 text-white"><a href="https://github.com/riddhima2b" target="_blank" rel="noopener noreferrer" >© Riddhima, 2026</a></footer>
+               
             </div>
         </>
     )
