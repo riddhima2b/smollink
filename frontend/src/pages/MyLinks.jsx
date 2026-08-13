@@ -15,7 +15,7 @@ const MyLinks = () => {
                 const links = await axios.get('http://localhost:3001/api/mylinks', 
                 { withCredentials: true });
                 const data = links.data;
-                console.log("API data:", data);
+                
                 setlinks(data);
             }
             catch(error){
@@ -34,7 +34,13 @@ const MyLinks = () => {
                 <Navbar />
                 
                 <h1 className="flex flex-col items-center-safe text-4xl text-[#ff4f87] p-3">My Links</h1>
-                <div className="text-white text-lg"><pre>{JSON.stringify(link, null, 2)}</pre></div>
+
+                {link.length===0?
+                <p>Create a link to get started!</p>
+                : <div className="text-white text-lg"><pre>{JSON.stringify(link, null, 2)}</pre></div>
+                    
+                }
+                
             </div>
         </div>
     );
