@@ -38,7 +38,7 @@ const MyLinks = () => {
 
                 { link.length===0?
                 <p>Create a link to get started!</p>
-                : <div className="max-w-6xl mx-auto mt-8 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
+                : <div className="max-w-6xl mx-auto mt-8 overflow-hidden rounded-xl border border-white/10 bg-white/2">
 
                     <table className="w-full border-collapse">
 
@@ -62,7 +62,7 @@ const MyLinks = () => {
                             {link.map((item) => (
                                 <tr
                                     key={item.id}
-                                    className="border-b border-white/[0.07] transition hover:bg-white/[0.025]">
+                                    className="border-b border-white/[0.07] transition hover:bg-white/2.5">
 
                                     <td className="px-6 py-6">
                                         <div className="max-w-md space-y-2">
@@ -84,7 +84,7 @@ const MyLinks = () => {
                                     </td>
 
                                     <td className="px-6 py-6">
-                                        <div className="flex gap-3 transition hover:border-cyan-400/40 hover:text-cyan-300 ">
+                                        <div className="flex px-6 gap-3 transition hover:border-cyan-400/40 hover:text-cyan-300">
                                     
                                                 <CopyButton text={item.customSlug
                                                     ? `localhost:3001/${item.customSlug}/${item.shortCode}`
