@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import CopyButton from "../components/CopyButton";
 import Navbar from "../components/Navbar";
 import Toast from "../components/Toast";
 const MyLinks = () => {
@@ -34,34 +35,72 @@ const MyLinks = () => {
                 <Navbar />
                 
                 <h1 className="flex flex-col items-center-safe text-4xl text-[#ff4f87] p-6">My Links</h1>
-                <br/>
+
                 { link.length===0?
                 <p>Create a link to get started!</p>
-                : <div className="max-w-6xl overflow-hidden border mx-auto mt-12 border-white rounded-md p-4">
-                    <table className="w-full items-center">
+                : <div className="max-w-6xl mx-auto mt-8 overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
 
-                    <thead className="text-cyan-400 text-3xl text-left font-serif space-y-4">
-                    <th>Link </th>
-                    <th>Created At</th>
-                    <th>Actions</th>
-                    </thead>
+                    <table className="w-full border-collapse">
 
-                    <tbody>
-                    {link.map((item) =>(
-                            <tr key={item.id} className=" px-5 py-6 text-xl items-center">
-                            <td className="p-4">{item.longUrl}</td>
-                            <td className="p-4">{item.customSlug ? `localhost:3001/${item.customSlug}/${item.shortCode}`: `localhost:3001/${item.shortCode}`}</td>
-                            <td className="p-4">{new Date(item.createdAt).toLocaleDateString()}</td>
+                        <thead className="text-cyan-400 font-serif text-2xl">
+                            <tr className="border-b border-white/10">
+                                <th className="px-6 py-5 text-left">
+                                    Link
+                                </th>
+
+                                <th className="px-6 py-5 text-left">
+                                    Created At
+                                </th>
+
+                                <th className="px-6 py-5 text-left">
+                                    Actions
+                                </th>
                             </tr>
-                        )
-                        )}
-                    </tbody>
-                        
+                        </thead>
+
+                        <tbody>
+                            {link.map((item) => (
+                                <tr
+                                    key={item.id}
+                                    className="border-b border-white/[0.07] transition hover:bg-white/[0.025]">
+
+                                    <td className="px-6 py-6">
+                                        <div className="max-w-md space-y-2">
+                                            <div className="truncate text-lg text-white/80">
+                                                {item.longUrl}
+                                            </div>
+
+                                            <div className="text-md text-cyan-300/80">
+                                                {item.customSlug
+                                                    ? `localhost:3001/${item.customSlug}/${item.shortCode}`
+                                                    : `localhost:3001/${item.shortCode}`}
+                                            </div>
+
+                                        </div>
+                                    </td>
+
+                                    <td className="px-6 py-6 text-lg text-white/60">
+                                        {new Date(item.createdAt).toLocaleDateString()}
+                                    </td>
+
+                                    <td className="px-6 py-6">
+                                        <div className="flex gap-3 transition hover:border-cyan-400/40 hover:text-cyan-300 ">
+                                    
+                                                <CopyButton text={item.customSlug
+                                                    ? `localhost:3001/${item.customSlug}/${item.shortCode}`
+                                                    : `localhost:3001/${item.shortCode}`}/> 
+                                            </div>
+                                    </td>
+
+                                </tr>
+                            ))}
+                        </tbody>
+
                     </table>
-                  </div>
-                
+                    </div>
                     
                 }
+                <br/>
                 
             </div>
         </div>
