@@ -85,7 +85,7 @@ const DashboardPage = () => {
                  
                     <div className="space-x-5">
                     <input type="text" value={slug} onChange={(slugChange)} placeholder="Add a custom link name!" className="border border-blue-200 p-2 rounded-md w-75 text-white" />
-                    <button id ="smollink-button" className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black w-40 pointer-events-auto hover:bg-lime-700 hover:border-lime-200" onClick ={smollify}>Smollify!</button>
+                    <button id ="smollink-button" className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black w-40 pointer-events-auto hover:bg-lime-700 hover:border-lime-200" onClick ={smollify}>Shrink it!</button>
                     </div>
                     <div className="my-3 flex items-center w-120 border border-cyan-300 bg-radial bg-[#087f99] p-2 rounded-md">
                     <input type="text" value={shortUrl} readOnly placeholder = "shortened-url/here" className=" text-white flex-1"/>
