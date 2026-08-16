@@ -31,10 +31,10 @@ const MyLinks = () => {
     return (
         <div>
         <Toast message={toast} onClose={() => setToast(null)} />
-        <div className="relative min-h-screen overflow-hidden bg-radial bg-[#0B0A12] text-white font-serif brightness-100 opacity-95">
+        <div className="relative min-h-screen overflow-hidden bg-radial bg-[#0B0A12] text-white font-serif brightness-100 opacity-95 pb-20">
                 <Navbar />
                 
-                <h1 className="flex flex-col items-center-safe text-4xl text-[#ff4f87] p-6">My Links</h1>
+                <h1 className="flex flex-col items-center-safe text-5xl text-[#ff4f87] p-6">My Links</h1>
 
                 { link.length===0?
                 <p>Create a link to get started!</p>

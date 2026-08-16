@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { LuClipboard, LuClipboardCheck } from "react-icons/lu";
 
 function CopyButton({ text }) {
   const [copied, setCopied] = useState(false);
@@ -15,8 +14,8 @@ function CopyButton({ text }) {
   };
 
   return (
-    <button onClick={handleCopy} className="flex items-center gap-1">
-      {copied ? <LuClipboardCheck color="white" size={27} /> : <LuClipboard size={27} color="white" />}
+    <button onClick={handleCopy} className="flex items-center p-1 border border-white text-sm rounded-sm">
+      {copied ? <p className="text-green-500">Copied!</p> : <p className="text-white">Copy</p>}
     </button>
   );
 }
