@@ -36,8 +36,7 @@ const LandingPage = () => {
     return(
         <>
          <Toast message={toast} onClose={() => setToast(null)} />
-            <div className="relative min-h-screen overflow-hidden bg-radial bg-[#0B0A12] font-serif brightness-100 opacity-95">
-
+         <div className="relative min-h-screen bg-radial bg-[#0B0A12] font-serif brightness-100 opacity-95">
                 <h1 className="flex justify px-8 py-4 text-3xl font-bold text-white">
                     
                     <Link to="/register">S <span className="text-[#69ff4f]">.</span></Link>
