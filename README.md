@@ -1,4 +1,3 @@
-# smollink
 URL shortener 
 
 # Snipppy - Simply Redirect 🔗
