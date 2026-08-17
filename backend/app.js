@@ -15,7 +15,7 @@ const prismaclient = require('./lib/prisma');
 const cookieParser = require('cookie-parser');
 app.use(cookieParser());
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:3001"],
+  origin: ["http://localhost:5173", base_url],
   credentials: true,
 }));
 
