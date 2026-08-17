@@ -51,12 +51,12 @@ const Registration = () => {
 
                 <form className="flex flex-col items-center gap-4 mx-auto rounded-2xl" onSubmit={handleRegistration}>
                 <h3 className="text-white"> Name </h3>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name" className="border border-blue-200 p-2  rounded-md w-full max-w-125 text-white" />
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name" className="border border-blue-200 p-2  rounded-md w-full max-w-100 text-white" />
                 <h3 className="text-white"> Email </h3>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="border border-blue-200 p-2  rounded-md w-full max-w-125 text-white" />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="border border-blue-200 p-2  rounded-md w-full max-w-100 text-white" />
                     <h3 className="text-white"> Password </h3>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" className="border border-blue-200 p-2 rounded-md w-full max-w-125 text-white bg-radial " />
-                    <button className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black pointer-events-auto hover:bg-lime-700 hover:border-lime-200 w-full max-w-125 text-xl" type="submit">Create Account</button>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" className="border border-blue-200 p-2 rounded-md w-full max-w-100 text-white bg-radial " />
+                    <button className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black pointer-events-auto hover:bg-lime-700 hover:border-lime-200 w-full max-w-100 text-xl" type="submit">Create Account</button>
 
                 </form>    
 

@@ -53,10 +53,10 @@ const LoginPage = () => {
 
                 <form className="flex flex-col items-center gap-4 mx-auto rounded-2xl" onSubmit={handleLogin}>
                 <h3 className="text-white text-xl"> Email </h3>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="text-xl border border-blue-200 p-2 rounded-md w-full max-w-125 text-white" />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="text-xl border border-blue-200 p-2 rounded-md w-full max-w-100 text-white" />
                     <h3 className="text-white text-xl"> Password </h3>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" className="text-xl border border-blue-200 p-2 rounded-md w-full max-w-125 text-white " />
-                    <button className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black pointer-events-auto hover:bg-lime-700 hover:border-lime-200 w-full max-w-125 text-2xl" type="submit">Login</button>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" className="text-xl border border-blue-200 p-2 rounded-md w-full max-w-100 text-white " />
+                    <button className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black pointer-events-auto hover:bg-lime-700 hover:border-lime-200 w-full max-w-100 text-2xl" type="submit">Login</button>
 
                 </form>    
 
@@ -64,7 +64,6 @@ const LoginPage = () => {
                         Don't have an account? <a href="/register" className="text-pink-600 hover:underline">Sign up</a> ➡️
                     </p>
             </div>
-            <footer className="font-serif absolute bottom-0 w-full text-center py-4 text-white"><a href="https://github.com/riddhima2b" target="_blank" rel="noopener noreferrer" >© Riddhima, 2026</a></footer>
             <Toast message={toast} onClose={() => setToast(null)} />
         </>
     )
