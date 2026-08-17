@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }) => {
     useEffect(() => {
       const checkAuth = async () => {
         try {
-          await axios.get(`${import.meta.env.VITE_API_URL}/api/user`, { withCredentials: true });
+          await axios.get('/api/user', { withCredentials: true });
           setStatus('authed');
         } catch {
           setTimeout(() => setStatus('unauthed'), 1500);
