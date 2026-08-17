@@ -13,7 +13,7 @@ const MyLinks = () => {
         const fetchLinks = async() =>{
     
             try{
-                const links = await axios.get(`${import.meta.env.VITE_API_URL}/api/mylinks`, 
+                const links = await axios.get('/api/mylinks', 
                 { withCredentials: true });
                 const data = links.data;
                 

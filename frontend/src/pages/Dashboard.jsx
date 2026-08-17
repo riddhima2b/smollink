@@ -15,7 +15,7 @@ const DashboardPage = () => {
     useEffect(() => {
         const getUser = async () => {
             try{
-                const user = await axios.get(`${import.meta.env.VITE_API_URL}/api/user`, {
+                const user = await axios.get('/api/user', {
                     withCredentials: true
                 });
                 const data = user.data.user.name;
@@ -42,7 +42,7 @@ const DashboardPage = () => {
         e.preventDefault();
         
         try{
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/shorten`, 
+            const response = await axios.post('/api/shorten', 
  
                 { userId : getId, url:longUrl, customSlug:slug},
             {
