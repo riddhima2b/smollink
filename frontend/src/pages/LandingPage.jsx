@@ -47,7 +47,7 @@ const LandingPage = () => {
                     booooring!
                 </h1>
                 <br/><br/>
-                <p className="text-xl flex justify-center text-cyan-200 brightness-100">
+                <p className="text-xl flex justify-center text-cyan-200 brightness-100 px-4">
                     Paste one below, and we'll make it smoll for you!
                 </p>
 
