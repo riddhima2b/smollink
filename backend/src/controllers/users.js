@@ -6,6 +6,7 @@ const { AuthenticationError } = require('../utils/errors');
 const register = async (req, res) => {
     try {
         const { email, password, name } = req.body;
+        console.log('Request body:', req.body);
         await registerUser(email, password, name);
         return res.status(201).json({ success: 'Registration successful!' });
     } catch (error) {
