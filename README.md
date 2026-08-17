@@ -1,6 +1,6 @@
-URL shortener 
-
 # Snipppy - Simply Redirect 🔗
+
+*(Repo name is `smollink` — legacy name from an earlier stage of the project. It's since been rebranded to Snippy.)*
 
 A full-stack URL shortener built on the PERN stack (PostgreSQL, Express, React, Node.js), with custom slugs, click analytics, and cookie-based authentication.
 
