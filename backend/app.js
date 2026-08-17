@@ -34,7 +34,7 @@ app.get('/api/mylinks', requireAuth, getLinksByUserController);
 app.post('/api/logout', logout);
 
 app.get('/:shortCode', optionalAuth, getUrlController);
-app.get('/:slug/:shortCode', requireAuth, getCustomShortController);
+app.get('/:slug/:shortCode', optionalAuth, getCustomShortController);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
