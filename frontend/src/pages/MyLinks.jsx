@@ -72,8 +72,8 @@ const MyLinks = () => {
 
                                             <div className="text-md text-cyan-300/80">
                                             {item.customSlug
-                                            ? `${import.meta.env.VITE_API_URL}/${item.customSlug}/${item.shortCode}`
-                                            : `${import.meta.env.VITE_API_URL}/${item.shortCode}`}
+                                                ? `https://www.snipppy.com/${item.customSlug}/${item.shortCode}`
+                                                : `https://www.snipppy.com/${item.shortCode}`}
                                             </div>
 
                                         </div>
