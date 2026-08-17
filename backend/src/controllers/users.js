@@ -24,8 +24,8 @@ const login = async (req, res) => {
         const { token, user: safeUser } = await loginUser(email, password);
         res.cookie('token', token, {
             httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            sameSite: 'Strict',
+            secure: process.env.NODE_ENV === 'production' && false,
+            sameSite: 'lax',
             expires: new Date(Date.now() + 60 * 60 * 1000)
         });        return res.status(200).json({ user: safeUser });        
     }catch(error){
