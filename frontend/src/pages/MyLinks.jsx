@@ -13,7 +13,7 @@ const MyLinks = () => {
         const fetchLinks = async() =>{
     
             try{
-                const links = await axios.get('http://localhost:3001/api/mylinks', 
+                const links = await axios.get(`${import.meta.env.VITE_API_URL}/api/mylinks`, 
                 { withCredentials: true });
                 const data = links.data;
                 
@@ -71,9 +71,9 @@ const MyLinks = () => {
                                             </div>
 
                                             <div className="text-md text-cyan-300/80">
-                                                {item.customSlug
-                                                    ? `localhost:3001/${item.customSlug}/${item.shortCode}`
-                                                    : `localhost:3001/${item.shortCode}`}
+                                            {item.customSlug
+                                            ? `${import.meta.env.VITE_API_URL}/${item.customSlug}/${item.shortCode}`
+                                            : `${import.meta.env.VITE_API_URL}/${item.shortCode}`}
                                             </div>
 
                                         </div>
@@ -87,8 +87,8 @@ const MyLinks = () => {
                                         <div className="flex px-6 gap-3 transition hover:border-cyan-400/40 hover:text-cyan-300">
                                     
                                                 <CopyButton text={item.customSlug
-                                                    ? `localhost:3001/${item.customSlug}/${item.shortCode}`
-                                                    : `localhost:3001/${item.shortCode}`}/> 
+                                                ? `${import.meta.env.VITE_API_URL}/${item.customSlug}/${item.shortCode}`
+                                                : `${import.meta.env.VITE_API_URL}/${item.shortCode}`}/> 
                                             </div>
                                     </td>
 

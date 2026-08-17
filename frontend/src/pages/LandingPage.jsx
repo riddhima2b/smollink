@@ -17,7 +17,7 @@ const LandingPage = () => {
         
         try{
             
-            const response = await axios.post('http://localhost:3001/api/shorten', {url:longUrl},
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/shorten`, {url:longUrl},
             {
                 headers: {
                     'Content-Type': 'application/json',
