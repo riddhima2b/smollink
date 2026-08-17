@@ -18,6 +18,7 @@ app.use(cors({
   origin: ["http://localhost:5173", base_url],
   credentials: true,
 }));
+app.set('trust proxy', 1);
 
 app.get('/', (req, res) => {
     res.send('Hello from the backend!');

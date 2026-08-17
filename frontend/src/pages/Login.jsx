@@ -30,7 +30,7 @@ const LoginPage = () => {
             
         }
         catch(error) {
-            setToast(error.response.data.message || 'Login failed. Please try again.');
+            setToast(error.response?.data?.error || 'Login failed. Please try again.');
         }
     }
     if (isRedirecting) return <Spinner />;

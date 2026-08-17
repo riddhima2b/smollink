@@ -26,7 +26,7 @@ const Registration = () => {
         }
         catch(error) {
             console.error('Error:', error);
-            setToast(error.response?.data?.message || 'Registration failed. Please try again.');
+            setToast(error.response?.data?.error || 'Registration failed. Please try again.');
         }
         
     }
