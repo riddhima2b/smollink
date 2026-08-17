@@ -37,7 +37,7 @@ const registerUser = async (email, password, name) => {
         where: { email: email },
     });
     if (existingUser) {
-        throw new Error('Email already exists');
+        throw new ValidationError('Email already exists');
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
