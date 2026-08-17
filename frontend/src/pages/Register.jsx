@@ -21,12 +21,14 @@ const Registration = () => {
                 withCredentials: true
             });
             console.log(response.data.user);
+            setToast('Registration successful! Redirecting to login...');
+            setTimeout(() => navigate('/login'), 1500);
         }
         catch(error) {
             console.error('Error:', error);
+            setToast(error.response.data.message || 'Registration failed. Please try again.');
         }
-        setToast('Registration successful! Redirecting to login...');
-        setTimeout(() => navigate('/login'), 1500);
+        
     }
 
     return(
