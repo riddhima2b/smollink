@@ -87,8 +87,8 @@ const MyLinks = () => {
                                         <div className="flex px-6 gap-3 transition hover:border-cyan-400/40 hover:text-cyan-300">
                                     
                                                 <CopyButton text={item.customSlug
-                                                ? `${import.meta.env.VITE_API_URL}/${item.customSlug}/${item.shortCode}`
-                                                : `${import.meta.env.VITE_API_URL}/${item.shortCode}`}/> 
+                                                ? `https://www.snipppy.com/${item.customSlug}/${item.shortCode}`
+                                                : `https://www.snipppy.com/${item.shortCode}`}/>
                                             </div>
                                     </td>
 
