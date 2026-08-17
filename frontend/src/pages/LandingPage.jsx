@@ -56,7 +56,7 @@ const LandingPage = () => {
                 <div className="flex-col flex items-center justify-center gap-2 px-4 py-6 p-6 mx-auto rounded-md text-xl"> 
                     
                     <input type="text" value={longUrl} onChange={change} placeholder="https://example.com/your/very/long/url/here" className="border border-blue-200 p-2 rounded-md  w-full max-w-[500px] text-white" />
-                    <div className="flex items-center gap-2 w-150 border border-cyan-300 bg-radial bg-[#087f99] p-2 rounded-md">
+                    <div className="flex items-center gap-2  w-full max-w-[500px] border border-cyan-300 bg-radial bg-[#087f99] p-2 rounded-md">
                     <input type="text" value={shortUrl} readOnly placeholder = "shortened-url/here" className=" text-white flex-1"/>
                     <CopyButton text={shortUrl} />
                     </div>
