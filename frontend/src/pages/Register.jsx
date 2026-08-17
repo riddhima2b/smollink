@@ -12,7 +12,7 @@ const Registration = () => {
         
         try{
             const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/register`,
-            {email:email, password:password},
+            {name:name,email:email, password:password},
             {
                 headers: {
                     'Content-Type': 'application/json',
