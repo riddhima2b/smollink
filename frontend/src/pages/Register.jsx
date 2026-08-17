@@ -35,7 +35,7 @@ const Registration = () => {
 
         <>
             <Toast message={toast} onClose={() => setToast(null)} />
-            <div className="relative min-h-screen overflow-hidden bg-radial bg-[#0B0A12] font-serif brightness-100 opacity-95 mb-6">
+            <div className="relative min-h-screen bg-radial bg-[#0B0A12] font-serif brightness-100 opacity-95 mb-6">
             <h1 className="flex justify px-8 py-4 text-3xl font-bold text-white">
                     
                     <Link to="/">S <span className="text-[#69ff4f]">.</span></Link> 
@@ -51,12 +51,12 @@ const Registration = () => {
 
                 <form className="flex flex-col items-center gap-4 mx-auto rounded-2xl" onSubmit={handleRegistration}>
                 <h3 className="text-white"> Name </h3>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name" className="border border-blue-200 p-2  rounded-md w-100 text-white" />
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name" className="border border-blue-200 p-2  rounded-md w-full max-w-125 text-white" />
                 <h3 className="text-white"> Email </h3>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="border border-blue-200 p-2  rounded-md w-100 text-white" />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="border border-blue-200 p-2  rounded-md w-full max-w-125 text-white" />
                     <h3 className="text-white"> Password </h3>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" className="border border-blue-200 p-2 rounded-md w-100 text-white bg-radial " />
-                    <button className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black pointer-events-auto hover:bg-lime-700 hover:border-lime-200 w-100 text-xl" type="submit">Create Account</button>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" className="border border-blue-200 p-2 rounded-md w-full max-w-125 text-white bg-radial " />
+                    <button className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black pointer-events-auto hover:bg-lime-700 hover:border-lime-200 w-full max-w-125 text-xl" type="submit">Create Account</button>
 
                 </form>    
 

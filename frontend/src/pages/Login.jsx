@@ -38,7 +38,7 @@ const LoginPage = () => {
 
         <>
             <Toast message={toast} onClose={() => setToast(null)} />
-            <div className="relative min-h-screen overflow-hidden bg-radial bg-[#0B0A12] font-serif brightness-100 opacity-95">
+            <div className="relative min-h-screen bg-radial bg-[#0B0A12] font-serif brightness-100 opacity-95">
                 <h1 className="flex justify px-8 py-4 text-3xl font-bold text-white">
                     
                     <Link to="/">S <span className="text-[#69ff4f]">.</span></Link> 
@@ -53,10 +53,10 @@ const LoginPage = () => {
 
                 <form className="flex flex-col items-center gap-4 mx-auto rounded-2xl" onSubmit={handleLogin}>
                 <h3 className="text-white text-xl"> Email </h3>
-                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="text-xl border border-blue-200 p-2 rounded-md w-100 text-white" />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="email@example.com" className="text-xl border border-blue-200 p-2 rounded-md w-full max-w-125 text-white" />
                     <h3 className="text-white text-xl"> Password </h3>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" className="text-xl border border-blue-200 p-2 rounded-md w-100 text-white " />
-                    <button className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black pointer-events-auto hover:bg-lime-700 hover:border-lime-200 w-100 text-2xl" type="submit">Login</button>
+                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="********" className="text-xl border border-blue-200 p-2 rounded-md w-full max-w-125 text-white " />
+                    <button className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black pointer-events-auto hover:bg-lime-700 hover:border-lime-200 w-full max-w-125 text-2xl" type="submit">Login</button>
 
                 </form>    
 

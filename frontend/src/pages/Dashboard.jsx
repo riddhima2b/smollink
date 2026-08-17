@@ -81,13 +81,13 @@ const DashboardPage = () => {
                 </p>
                     
                 <form onSubmit={smollify} className="flex flex-col items-center justify-center gap-4 py-6">
-                    <input type="text" value={longUrl} onChange={change} placeholder="https://example.com/your/very/long/url/here" className="border border-blue-200 rounded-md w-120 text-white p-2" />
+                    <input type="text" value={longUrl} onChange={change} placeholder="https://example.com/your/very/long/url/here" className="border border-blue-200 rounded-md w-full max-w-125 text-white p-2" />
                  
                     <div className="space-x-5">
                     <input type="text" value={slug} onChange={(slugChange)} placeholder="Add a custom link name!" className="border border-blue-200 p-2 rounded-md w-75 text-white" />
                     <button id ="smollink-button" className="border border-lime-600 bg-radial bg-lime-400 p-2 mt-4 rounded-md text-black w-40 pointer-events-auto hover:bg-lime-700 hover:border-lime-200" onClick ={smollify}>Shrink it!</button>
                     </div>
-                    <div className="my-3 flex items-center w-120 border border-cyan-300 bg-radial bg-[#087f99] p-2 rounded-md">
+                    <div className="my-3 flex items-center w-full max-w-125 border border-cyan-300 bg-radial bg-[#087f99] p-2 rounded-md">
                     <input type="text" value={shortUrl} readOnly placeholder = "shortened-url/here" className=" text-white flex-1"/>
                     <CopyButton text={shortUrl} />
                     </div>
