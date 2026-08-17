@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Toast from "../components/Toast";
 const Registration = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password,setPassword] = useState("");
-
-
+    const [toast, setToast] = useState(null);
+    const navigate = useNavigate();
     const handleRegistration = async (e) => {
         e.preventDefault();
         
@@ -19,17 +20,19 @@ const Registration = () => {
                 },
                 withCredentials: true
             });
-            alert('Login successful!');
             console.log(response.data.user);
         }
         catch(error) {
             console.error('Error:', error);
         }
+        setToast('Registration successful! Redirecting to login...');
+        setTimeout(() => navigate('/login'), 1500);
     }
 
     return(
 
         <>
+            <Toast message={toast} onClose={() => setToast(null)} />
             <div className="relative min-h-screen overflow-hidden bg-radial bg-[#0B0A12] font-serif brightness-100 opacity-95 mb-6">
             <h1 className="flex justify px-8 py-4 text-3xl font-bold text-white">
                     

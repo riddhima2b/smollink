@@ -24,9 +24,10 @@ const LoginPage = () => {
                 withCredentials: true
             });
             setIsRedirecting(true);
+            setToast('Login successful! Redirecting to dashboard...');
             setTimeout(() => navigate('/dashboard'), 1500);
             console.log(response.data.user);
-            setToast('Login successful! Redirecting to dashboard...');
+            
         }
         catch(error) {
             setToast(error.response.data.message || 'Login failed. Please try again.');
