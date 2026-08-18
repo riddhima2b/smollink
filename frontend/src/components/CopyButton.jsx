@@ -14,7 +14,7 @@ function CopyButton({ text }) {
   };
 
   return (
-    <button onClick={handleCopy} className="flex items-center p-1 border border-white text-sm rounded-sm">
+    <button onClick={handleCopy} type = "button" className="flex items-center p-1 border border-white text-sm rounded-sm">
       {copied ? <p className="text-green-500">Copied!</p> : <p className="text-white">Copy</p>}
     </button>
   );
