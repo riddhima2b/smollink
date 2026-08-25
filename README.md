@@ -30,17 +30,3 @@ A full-stack URL shortener built on the PERN stack (PostgreSQL, Express, React, 
 
 ---
 
-## Project Structure
-
-```
-snippy/
-├── frontend/          # React frontend
-├── backend/          # Express backend
-│   ├── prisma/       # Prisma schema & migrations
-│   ├── controllers/
-│   ├── routes/
-│   └── middleware/
-└── README.md
-```
-
----
