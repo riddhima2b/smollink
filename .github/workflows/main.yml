@@ -1,28 +1,15 @@
-name: Deploy Snipppy
+name: Test SSH Connection
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  deploy:
+  test-ssh:
     runs-on: ubuntu-latest
-    steps:
-      - name: deploy to ec2
-        uses: appleboy/ssh-action@v1.2.2
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            cd /home/ubuntu/smollink
-            git pull origin main
-            cd backend
-            npm install
-            npx prisma generate
-            pm2 restart smollink-server
 
+    steps:
       - name: Test SSH Connection
         run: |
-          ssh -v -o ConnectTimeout=10 -i /tmp/key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "echo 'Connection successful'"
+          ssh -v -o ConnectTimeout=10 -i /tmp/key.pem \
+            ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} \
+            "echo 'Connection successful'"
