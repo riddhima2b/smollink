@@ -1,6 +1,6 @@
 name: Deploy Snipppy
 
-on: 
+on:
   push:
     branches:
       - main
@@ -22,3 +22,7 @@ jobs:
             npm install
             npx prisma generate
             pm2 restart smollink-server
+
+      - name: Test SSH Connection
+        run: |
+          ssh -v -o ConnectTimeout=10 -i /tmp/key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} "echo 'Connection successful'"
