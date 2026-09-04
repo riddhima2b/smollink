@@ -1,5 +1,5 @@
 const { ValidationError } = require('../utils/errors');
-const {recordClick} = require('../services/analytics');
+const {recordClick, getLinkStats} = require('../services/analytics');
 const {createShortUrl, getUrl, getLinksByUserId, getUrlBySlugAndCode} = require('../services/link.service');
 const baseUrl = process.env.BASE_URL;
 
