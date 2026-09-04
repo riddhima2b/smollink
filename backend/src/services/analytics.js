@@ -21,8 +21,8 @@ async function recordClick (linkId, req) {
     }
 
 async function getLinkStats(linkId) {
-        const totalClicks = await prisma.click.count({ where: { linkId } });
-        const clicks = await prisma.click.findMany({ where: { linkId } });
+        const totalClicks = await prismaclient.primsa.click.count({ where: { linkId } });
+        const clicks = await prismaclient.primsa.click.findMany({ where: { linkId } });
         return { totalClicks, clicks };
 }
       
