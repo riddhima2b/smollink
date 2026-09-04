@@ -1,4 +1,5 @@
 const { ValidationError } = require('../utils/errors');
+const {recordClick} = require('../services/analytics');
 const {createShortUrl, getUrl, getLinksByUserId, getUrlBySlugAndCode} = require('../services/link.service');
 const baseUrl = process.env.BASE_URL;
 
@@ -12,7 +13,9 @@ const getUrlController = async (req, res) => {
       return res.status(404).json({ error: 'Short URL not found' });
     }
 
-    return res.redirect(link.longUrl);
+    res.redirect(link.longUrl);
+    recordClick(link.id, req).catch((err) => console.error('recordClick failed:', err));
+    return; 
   }
   catch(error){
     console.error(error);
@@ -53,7 +56,10 @@ const getCustomShortController = async(req, res) =>{
           const { slug, shortCode } = req.params;
           const link = await getUrlBySlugAndCode(slug, shortCode);
           if (!link) return res.status(404).json({ error: 'Link not found' });
-          return res.redirect(link.longUrl);
+
+          res.redirect(link.longUrl);
+          recordClick(link.id, req).catch((err) => console.error('recordClick failed:', err));
+          return; 
     }catch(err){
       console.error(err);
       if (err instanceof ValidationError) {
@@ -80,4 +86,16 @@ const getLinksByUserController = async(req, res) =>{
       return res.status(500).json({ error: 'Something went wrong' });
     }
 }
-module.exports = { shortenController, getCustomShortController, getLinksByUserController, getUrlController };
+
+const getLinkStatsController = async (req, res) => {
+  try {
+    const linkId = Number(req.params.id);
+    const stats = await getLinkStats(linkId);
+    return res.status(200).json(stats);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Something went wrong' });
+  }
+};
+
+module.exports = { shortenController, getCustomShortController, getLinksByUserController, getUrlController, getLinkStatsController };

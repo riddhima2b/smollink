@@ -8,7 +8,7 @@ const base_url = process.env.BASE_URL;
 const linkService = require('./src/services/link.service');
 const rateLimit = require('./middleware/rateLimit');
 const {register, login, getUserInfo, logout } = require('./src/controllers/users');
-const { shortenController, getCustomShortController, getUrlController, getLinksByUserController } = require('./src/controllers/link.service');
+const { shortenController, getCustomShortController, getUrlController, getLinksByUserController,getLinkStatsController } = require('./src/controllers/link.service');
 const optionalAuth = require('./middleware/middleware').optionalAuth;
 const requireAuth = require('./middleware/middleware').requireAuth;
 const prismaclient = require('./lib/prisma');
@@ -29,7 +29,7 @@ app.post('/api/register',register);
 app.post('/api/login', login);
 app.get('/api/user', requireAuth, getUserInfo);
 app.post('/api/shorten', optionalAuth, rateLimit, shortenController);
-
+app.get('/api/links/:id/stats', getLinkStatsController);
 app.get('/api/mylinks', requireAuth, getLinksByUserController); 
 app.post('/api/logout', logout);
 
