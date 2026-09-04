@@ -12,9 +12,8 @@ const getUrlController = async (req, res) => {
     if (!link) {
       return res.status(404).json({ error: 'Short URL not found' });
     }
-
-    res.redirect(link.longUrl);
     recordClick(link.id, req).catch((err) => console.error('recordClick failed:', err));
+    res.redirect(link.longUrl);
     return; 
   }
   catch(error){
@@ -57,8 +56,8 @@ const getCustomShortController = async(req, res) =>{
           const link = await getUrlBySlugAndCode(slug, shortCode);
           if (!link) return res.status(404).json({ error: 'Link not found' });
 
-          res.redirect(link.longUrl);
           recordClick(link.id, req).catch((err) => console.error('recordClick failed:', err));
+          res.redirect(link.longUrl);
           return; 
     }catch(err){
       console.error(err);
