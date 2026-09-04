@@ -3,7 +3,7 @@ const {UAParser} = require('ua-parser-js');
 const geoip = require('geoip-lite');
 
 async function recordClick (linkId, req) {
-    const parser = new UAParser(req.headers('user-agent'));
+    const parser = new UAParser(req.headers['user-agent']);
     const ua = parser.getResult();
     const device = [ua.browser.name, ua.os.name].filter(Boolean).join('/') || "Unknown";
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
