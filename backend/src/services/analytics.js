@@ -10,7 +10,7 @@ async function recordClick (linkId, req) {
     const geo = geoip.lookup(ip);
     const referrer = req.headers['referer'] || 'Direct';
     
-    return prisma.click.create({
+    return prismaclient.primsa.click.create({
         data: {
           linkId,
           device,
@@ -21,6 +21,8 @@ async function recordClick (linkId, req) {
     }
 
 async function getLinkStats(linkId) {
+        console.log("linkId:", linkId);
+        console.log("type:", typeof linkId);
         const totalClicks = await prismaclient.primsa.click.count({ where: { linkId } });
         const clicks = await prismaclient.primsa.click.findMany({ where: { linkId } });
         return { totalClicks, clicks };
