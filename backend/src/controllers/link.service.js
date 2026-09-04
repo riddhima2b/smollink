@@ -89,7 +89,7 @@ const getLinksByUserController = async(req, res) =>{
 
 const getLinkStatsController = async (req, res) => {
   try {
-    const linkId = req.params.id;
+    const linkId = Number(req.params.id);
     const stats = await getLinkStats(linkId);
     return res.status(200).json(stats);
   } catch (err) {
