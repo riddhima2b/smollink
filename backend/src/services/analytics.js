@@ -1,6 +1,6 @@
 const prismaclient = require('../../lib/prisma');
 const {UAParser} = require('ua-parser-js');
-const geoip = require('geo-ip-lite');
+const geoip = require('geoip-lite');
 
 async function recordClick (linkId, req) {
     const parser = new UAParser(req.headers('user-agent'));
