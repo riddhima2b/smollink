@@ -14,6 +14,7 @@ const optionalAuth = require('./middleware/middleware').optionalAuth;
 const requireAuth = require('./middleware/middleware').requireAuth;
 const prismaclient = require('./lib/prisma');
 const cookieParser = require('cookie-parser');
+const { getLinkAnalytics } = require('./src/services/analytics');
 app.use(cookieParser());
 app.use(cors({
   origin: ["http://localhost:5173", base_url],
@@ -31,7 +32,7 @@ app.post('/api/login', login);
 app.get('/api/user', requireAuth, getUserInfo);
 app.post('/api/shorten', optionalAuth, rateLimit, shortenController);
 app.get('/api/links/:id/stats', getLinkStatsController);
-app.get('/api/analytics/:id', getLinkStatsController);
+app.get('/api/analytics/:id', getLinkAnalyticsController);  
 app.get('/api/mylinks', requireAuth, getLinksByUserController); 
 app.post('/api/logout', logout);
 

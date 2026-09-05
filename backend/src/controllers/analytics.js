@@ -1,4 +1,3 @@
-const { get } = require('https');
 const {getLinkStats, getLinkAnalytics} = require('../services/analytics');
 
 const getLinkStatsController = async (req, res) => {
