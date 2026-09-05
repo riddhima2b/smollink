@@ -10,4 +10,4 @@ function isValidUrl(value) {
         return false;
     }
 }
-export default isValidUrl;
+module.exports = { isValidUrl };
