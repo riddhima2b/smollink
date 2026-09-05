@@ -1,6 +1,7 @@
 const Base62 = require('../utils/base62');
 const prismaclient = require('../../lib/prisma');
 const { ValidationError } = require('../utils/errors');
+const { isValidUrl } = require('../utils/validateUrl');
 
 const reserved_slugs = ['api', 'login', 'register', 'user', 'logout'];
 
@@ -13,6 +14,10 @@ async function fetchUrl(url, slug, userId)
     return link;
 }
 async function createShortUrl(url,userId,customSlug) {
+
+    if(!isValidUrl(url)){
+        throw new ValidationError('Invalid URL format');
+    }
 
     if (!url || typeof url !== 'string') {
         throw new ValidationError('URL is required');
