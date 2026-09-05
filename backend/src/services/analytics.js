@@ -8,11 +8,6 @@ async function recordClick (linkId, req) {
     const device = [ua.browser.name, ua.os.name].filter(Boolean).join('/') || "Unknown";
     const ip =  req.headers['x-forwarded-for']?.split(',')[0].trim() || req.socket.remoteAddress;
     const geo = geoip.lookup(ip);
-    console.log("XFF:", req.headers['x-forwarded-for']);
-    console.log("X-Real-IP:", req.headers['x-real-ip']);
-    console.log("Socket:", req.socket.remoteAddress);
-    console.log("IP used:", ip);
-    console.log("GEO:", geo);
     const referrer = req.headers['referer'] || 'Direct';
     
     return prismaclient.primsa.click.create({
