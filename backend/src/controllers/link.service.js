@@ -1,5 +1,5 @@
 const { ValidationError } = require('../utils/errors');
-const {recordClick, getLinkStats} = require('../services/analytics');
+const {recordClick} = require('../services/analytics');
 const {createShortUrl, getUrl, getLinksByUserId, getUrlBySlugAndCode} = require('../services/link.service');
 const baseUrl = process.env.BASE_URL;
 
@@ -86,15 +86,5 @@ const getLinksByUserController = async(req, res) =>{
     }
 }
 
-const getLinkStatsController = async (req, res) => {
-  try {
-    const linkId = Number(req.params.id);
-    const stats = await getLinkStats(linkId);
-    return res.status(200).json(stats);
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ error: 'Something went wrong' });
-  }
-};
 
-module.exports = { shortenController, getCustomShortController, getLinksByUserController, getUrlController, getLinkStatsController };
+module.exports = { shortenController, getCustomShortController, getLinksByUserController, getUrlController };

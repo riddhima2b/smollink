@@ -20,12 +20,38 @@ async function recordClick (linkId, req) {
       });
     }
 
-async function getLinkStats(linkId) {
-        console.log("linkId:", linkId);
-        console.log("type:", typeof linkId);
-        const totalClicks = await prismaclient.primsa.click.count({ where: { linkId } });
-        const clicks = await prismaclient.primsa.click.findMany({ where: { linkId } });
-        return { totalClicks, clicks };
+async function getLinkStats(linkId) {        
+    const totalClicks = await prismaclient.primsa.click.count({ where: { linkId } });
+    return totalClicks;
 }
       
-module.exports = { recordClick, getLinkStats };
+async function getLinkAnalytics(linkId) {
+
+    const totalClicks = await prismaclient.primsa.click.count({ where: { linkId } });
+    
+    const countries = await prismaclient.primsa.click.groupBy({
+      by: ['country'],
+      where:{linkId},
+      _count: { country: true },
+    });
+
+    const devices = await prismaclient.primsa.click.groupBy({
+      by: ['device'],
+      where:{linkId},
+      _count: { device: true },
+    });
+
+    const referrers = await prismaclient.primsa.click.groupBy({
+      by: ['referrer'],
+      where:{linkId},
+      _count: { referrer: true },
+    });
+
+    return {
+      totalClicks,
+      countries, 
+      devices,referrers
+    };
+
+}
+module.exports = { recordClick, getLinkStats, getLinkAnalytics };
