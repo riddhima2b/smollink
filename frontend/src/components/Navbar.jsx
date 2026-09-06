@@ -22,7 +22,6 @@ const Navbar = () => {
 
                 <div className="flex gap-8 text-xl">
                     <Link to="/mylinks"><span>My Links</span></Link>
-                    <span>Analytics</span>
                     <button onClick={handleLogout}><span className="text-[#69ff4f]">Logout</span></button>
                 </div>
                 </div>

@@ -86,7 +86,7 @@ const MyLinks = () => {
                                     </td>
 
                                     <td className="px-6 py-6">
-                                        <div className="flex px-6 gap-3 transition hover:border-cyan-400/40 hover:text-cyan-300">
+                                        <div className="flex items-center px-6 gap-3 transition hover:border-cyan-400/40 hover:text-cyan-300">
                                     
                                                 <CopyButton text={item.customSlug
                                                 ? `https://www.snipppy.com/${item.customSlug}/${item.shortCode}`
