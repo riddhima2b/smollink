@@ -13,7 +13,7 @@ const Analytics = () =>{
     useEffect(() => {
         const fetchAnalytics = async () => {
             try {
-                const response = await axios.get('/api/analytics/${id}', { withCredentials: true });
+                const response = await axios.get(`/api/analytics/${id}`, { withCredentials: true });
                 setAnalytics(response.data);
             } catch (error) {
                 console.error(error);
