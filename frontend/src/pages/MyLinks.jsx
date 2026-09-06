@@ -93,7 +93,7 @@ const MyLinks = () => {
                                                 : `https://www.snipppy.com/${item.shortCode}`}/>
                                         </div>
 
-                                        <button onClick={() => navigate(`/api/analytics/${item.id}`)}
+                                        <button onClick={() => navigate(`/analytics/${item.id}`)}
                                         className="px-4 py-2 rounded-md border border-cyan-400/30 text-cyan-300 text-sm hover:bg-cyan-400/10 hover:border-cyan-400/60 transition">
                                         Analytics
                                         </button>
