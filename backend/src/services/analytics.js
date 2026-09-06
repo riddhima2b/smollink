@@ -47,10 +47,33 @@ async function getLinkAnalytics(linkId) {
       _count: { referrer: true },
     });
 
+    const recentClicks = await prismaclient.primsa.click.findMany({
+      where: { linkId },
+      orderBy: { createdAt: 'desc' },
+      take: 5,
+      select: {
+        timestamp: true,
+        device: true,
+        country: true,
+        referrer: true
+    }
+    });
+
+    const formattedCountries = countries.map(item => ({ country: item.country, count: item._count.country }));
+
+    const formattedDevices = devices.map(item => ({ device: item.device, count: item._count.device }));
+    const formattedRefferers = referrers.map(item => ({ referrer: item.referrer, count: item._count.referrer }));
+    const formattedRecentClicks = recentClicks.map(click => ({
+      timestamp: click.timestamp,
+      device: click.device,
+      country: click.country,
+      referrer: click.referrer
+    }));
+
     return {
       totalClicks,
-      countries, 
-      devices,referrers
+      formattedCountries, 
+      formattedDevices,formattedRefferers
     };
 
 }
