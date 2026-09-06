@@ -49,7 +49,7 @@ async function getLinkAnalytics(linkId) {
 
     const recentClicks = await prismaclient.primsa.click.findMany({
       where: { linkId },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { timestamp: 'desc' },
       take: 5,
       select: {
         timestamp: true,
@@ -73,7 +73,7 @@ async function getLinkAnalytics(linkId) {
     return {
       totalClicks,
       formattedCountries, 
-      formattedDevices,formattedRefferers
+      formattedDevices,formattedRefferers, formattedRecentClicks
     };
 
 }
