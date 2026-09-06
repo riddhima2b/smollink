@@ -1,17 +1,19 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Toast from "../components/Toast";
 
 const Analytics = () =>{
 
+    const {id} = useParams();
     const [toast, setToast] = useState(null);
     const [analytics, setAnalytics] = useState(null);
 
     useEffect(() => {
         const fetchAnalytics = async () => {
             try {
-                const response = await axios.get('/api/analytics', { withCredentials: true });
+                const response = await axios.get('/api/analytics/{$id}', { withCredentials: true });
                 setAnalytics(response.data);
             } catch (error) {
                 console.error(error);
@@ -20,7 +22,7 @@ const Analytics = () =>{
         };
 
         fetchAnalytics();
-    }, []);
+    }, [id]);
 
     return (
         <div>
