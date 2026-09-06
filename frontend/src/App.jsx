@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import "./index.css";
+import Analytics from "./pages/Analytics";
 import Dashboard from "./pages/Dashboard";
 import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/Login";
@@ -17,7 +18,7 @@ function App() {
     <Route path="/register" element={<Registration />} />
     <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
     <Route path="/mylinks" element={<ProtectedRoute><MyLinks /></ProtectedRoute>} />
-    <Route path="/analytics/:id" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+    <Route path="/analytics/:id" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
 
     </Routes>    
     </>
