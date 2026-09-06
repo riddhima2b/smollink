@@ -86,18 +86,23 @@ const MyLinks = () => {
                                     </td>
 
                                     <td className="px-6 py-6">
-                                        <div className="flex items-center px-6 gap-3 transition hover:border-cyan-400/40 hover:text-cyan-300">
-                                    
-                                                <CopyButton text={item.customSlug
-                                                ? `https://www.snipppy.com/${item.customSlug}/${item.shortCode}`
-                                                : `https://www.snipppy.com/${item.shortCode}`}/>
+                                    <div className="flex items-center justify-between gap-6">
+
+                                        <div className="flex items-center gap-3">
+                                            <CopyButton
+                                                text={
+                                                    item.customSlug
+                                                        ? `https://www.snipppy.com/${item.customSlug}/${item.shortCode}`
+                                                        : `https://www.snipppy.com/${item.shortCode}`
+                                                }
+                                            />
                                         </div>
 
                                         <button onClick={() => navigate(`/analytics/${item.id}`)}
                                         className="px-4 py-2 rounded-md border border-cyan-400/30 text-cyan-300 text-sm hover:bg-cyan-400/10 hover:border-cyan-400/60 transition">
-                                        Analytics
+                                            Analytics
                                         </button>
-
+                                        </div>
                                     </td>
 
                                 </tr>
