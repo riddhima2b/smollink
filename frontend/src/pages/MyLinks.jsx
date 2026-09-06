@@ -1,12 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import CopyButton from "../components/CopyButton";
 import Navbar from "../components/Navbar";
 import Toast from "../components/Toast";
+
 const MyLinks = () => {
 
     const [toast, setToast] = useState(null);
     const [link, setlinks] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -84,12 +87,20 @@ const MyLinks = () => {
                                     </td>
 
                                     <td className="px-6 py-6">
-                                        <div className="flex px-6 gap-3 transition hover:border-cyan-400/40 hover:text-cyan-300">
-                                    
-                                                <CopyButton text={item.customSlug
-                                                ? `https://www.snipppy.com/${item.customSlug}/${item.shortCode}`
-                                                : `https://www.snipppy.com/${item.shortCode}`}/>
-                                            </div>
+                                        <div className="flex px-6 gap-3">
+
+                                            <CopyButton text={item.customSlug
+                                            ? `https://www.snipppy.com/${item.customSlug}/${item.shortCode}`
+                                            : `https://www.snipppy.com/${item.shortCode}`}/>
+
+                                            <button
+                                                onClick={() => navigate(`/links/${item.id}/analytics`)}
+                                                className="px-4 py-2 rounded-md bg-white text-[#0B0A12] text-sm font-medium hover:bg-cyan-100 transition"
+                                            >
+                                                Analytics
+                                            </button>
+
+                                        </div>
                                     </td>
 
                                 </tr>
