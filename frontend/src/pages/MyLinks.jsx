@@ -42,7 +42,7 @@ const MyLinks = () => {
                 <p>Create a link to get started!</p>
                 : <div className="max-w-6xl mx-auto mt-8 rounded-xl border border-white/10 bg-white/2">
 
-                    <table className="w-full border-collapse">
+                    <table className="w-full border-collapse min-w-[700px]">
 
                         <thead className="text-cyan-400 font-serif text-2xl">
                             <tr className="border-b border-white/10">
