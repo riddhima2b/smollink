@@ -21,8 +21,9 @@ const Navbar = () => {
                 </h1>
 
                 <div className="flex gap-8 text-xl">
+                    <Link to="/dashboard"><span>Dashboard</span></Link>
                     <Link to="/mylinks"><span>My Links</span></Link>
-                    <button onClick={handleLogout}><span className="text-[#69ff4f]">Logout</span></button>
+                    <Link><button onClick={handleLogout}><span className="text-[#69ff4f]">Logout</span></button></Link>
                 </div>
                 </div>
             </nav>
