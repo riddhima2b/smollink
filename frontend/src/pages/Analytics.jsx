@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Spinner from "../components/Spinner";
 import Toast from "../components/Toast";
 
 const Analytics = () =>{
@@ -36,7 +37,7 @@ const Analytics = () =>{
                         <pre>{JSON.stringify(analytics, null, 2)}</pre>
                     </div>
                 ) : (
-                    <p>Loading analytics...</p>
+                    <Spinner />
                 )}
             </div>
         </div>
