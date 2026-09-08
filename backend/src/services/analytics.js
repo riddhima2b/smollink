@@ -25,48 +25,61 @@ async function getLinkStats(linkId) {
     return totalClicks;
 }
       
+
 async function getLinkAnalytics(linkId) {
 
-  const [link, totalClicks, formattedCountries, formattedDevices, formattedRefferers, formattedRecentClicks] = await Promise.all([
-    prismaclient.primsa.link.findUnique({
-      where: { id: linkId },
-      select: { shortCode: true, customSlug: true, longUrl: true },
-    }),
-    prismaclient.primsa.click.count({ where: { linkId } }),
-    prismaclient.primsa.click.groupBy({
-      by: ['country'],
-      where: { linkId },
-      _count: { country: true },
-    }),
-    prismaclient.primsa.click.groupBy({
-      by: ['device'],
-      where: { linkId },
-      _count: { device: true },
-    }),
-    prismaclient.primsa.click.groupBy({
-      by: ['referrer'],
-      where: { linkId },
-      _count: { referrer: true },
-    }),
-    prismaclient.primsa.click.findMany({
-      where: { linkId },
-      orderBy: { timestamp: 'desc' },
-      take: 5,
-      select: { timestamp: true, device: true, country: true, referrer: true },
-    }),
-  ]);
-
-  if (!link) {
-    throw new Error('Link not found'); 
-  }
-
-  return {
-    shortCode: link.shortCode,
-    customSlug: link.customSlug,
-    longUrl: link.longUrl,
-    totalClicks,
-      formattedCountries, 
-      formattedDevices,formattedRefferers, formattedRecentClicks
+  const [link, totalClicks, countries, devices, referrers, recentClicks] = await Promise.all([
+  prismaclient.primsa.link.findUnique({
+        where: { id: linkId },
+        select: { shortCode: true, customSlug: true, longUrl: true },
+      }),
+      prismaclient.primsa.click.count({ where: { linkId } }),
+      prismaclient.primsa.click.groupBy({
+        by: ['country'],
+        where: { linkId },
+        _count: { country: true },
+      }),
+      prismaclient.primsa.click.groupBy({
+        by: ['device'],
+        where: { linkId },
+        _count: { device: true },
+      }),
+      prismaclient.primsa.click.groupBy({
+        by: ['referrer'],
+        where: { linkId },
+        _count: { referrer: true },
+      }),
+      prismaclient.primsa.click.findMany({
+        where: { linkId },
+        orderBy: { timestamp: 'desc' },
+        take: 5,
+        select: { timestamp: true, device: true, country: true, referrer: true },
+      }),
+    ]);
+  
+    if (!link) {
+      throw new Error('Link not found');
+    }
+  
+    const formattedCountries = countries.map(item => ({ country: item.country, count: item._count.country }));
+    const formattedDevices = devices.map(item => ({ device: item.device, count: item._count.device }));
+    const formattedRefferers = referrers.map(item => ({ referrer: item.referrer, count: item._count.referrer }));
+    const formattedRecentClicks = recentClicks.map(click => ({
+      timestamp: click.timestamp,
+      device: click.device,
+      country: click.country,
+      referrer: click.referrer,
+    }));
+  
+    return {
+      shortCode: link.shortCode,
+      customSlug: link.customSlug,
+      longUrl: link.longUrl,
+      totalClicks,
+      formattedCountries,
+      formattedDevices,
+      formattedRefferers,
+      formattedRecentClicks,
     };
-}
+  }
 module.exports = { recordClick, getLinkStats, getLinkAnalytics };
