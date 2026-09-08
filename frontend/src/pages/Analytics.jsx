@@ -78,10 +78,10 @@ const Analytics = () => {
 
                     {/* Breakdown cards */}
                     <div className="mt-6 grid gap-5 md:grid-cols-2">
-                        <AnalyticsCard title="Countries" data={analytics.countries} />
-                        <AnalyticsCard title="Devices" data={analytics.devices} />
-                        <AnalyticsCard title="Referrers" data={analytics.referrers} />
-                        <RecentClicksCard data={analytics.recentClicks} />
+                        <AnalyticsCard title="Countries" data={analytics.formattedCountries} labelKey="country" />
+                        <AnalyticsCard title="Devices" data={analytics.formattedDevices} labelKey="device" />
+                        <AnalyticsCard title="Referrers" data={analytics.formattedRefferers} labelKey="referrer" />
+                        <RecentClicksCard data={analytics.formattedRecentClicks} />
                     </div>
 
                 </div>
@@ -94,17 +94,14 @@ const Analytics = () => {
     );
 };
 
-const AnalyticsCard = ({ title, data }) => {
+const AnalyticsCard = ({ title, data, labelKey }) => {
 
     const entries = data || [];
     const total = entries.reduce((sum, item) => sum + item.count, 0);
 
     return (
         <div className="rounded-xl border border-white/10 bg-white/2 p-6">
-
-            <h2 className="text-lg text-cyan-400 mb-5">
-                {title}
-            </h2>
+            <h2 className="text-lg text-cyan-400 mb-5">{title}</h2>
 
             {entries.length === 0 ? (
                 <p className="text-sm text-white/40">No data yet</p>
@@ -114,12 +111,11 @@ const AnalyticsCard = ({ title, data }) => {
                         const percentage = total === 0 ? 0 : Math.round((item.count / total) * 100);
 
                         return (
-                            <div key={item.label}>
+                            <div key={item[labelKey]}>
                                 <div className="mb-1.5 flex items-center justify-between text-sm">
-                                    <span className="text-white/80">{item.label}</span>
+                                    <span className="text-white/80">{item[labelKey]}</span>
                                     <span className="text-white/40">{item.count} · {percentage}%</span>
                                 </div>
-
                                 <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
                                     <div
                                         className="h-full rounded-full bg-[#ff4f87] transition-all"
