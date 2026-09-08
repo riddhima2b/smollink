@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
+import CopyButton from "../components/CopyButton";
 import Navbar from "../components/Navbar";
 import Spinner from "../components/Spinner";
 import Toast from "../components/Toast";
@@ -34,170 +35,136 @@ const Analytics = () => {
         return <Spinner />;
     }
 
+    const shortUrl = analytics.customSlug
+        ? `https://www.snipppy.com/${analytics.customSlug}/${analytics.shortCode}`
+        : `https://www.snipppy.com/${analytics.shortCode}`;
+
     return (
         <>
+           
+
+            <div className="relative min-h-screen bg-radial bg-[#0B0A12] text-white font-serif brightness-100 opacity-95 pb-20">
             <Navbar />
+                <div className="max-w-6xl mx-auto px-4 pt-10">
 
-            <main className="min-h-screen bg-black text-white px-4 py-10 sm:px-8">
-                <div className="mx-auto max-w-6xl">
+                    {/* Header card */}
+                    <div className="rounded-xl border border-white/10 bg-white/2 p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
-                    {/* Header */}
-                    <div className="flex flex-col gap-6 border-b border-zinc-800 pb-8 sm:flex-row sm:items-end sm:justify-between">
-
-                        <div>
-                            <p className="mb-2 text-xs font-medium tracking-[0.2em] text-zinc-500">
+                        <div className="min-w-0">
+                            <p className="text-xs tracking-[0.2em] text-cyan-400/70 mb-1">
                                 LINK ANALYTICS
                             </p>
 
-                            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-                                Analytics
-                            </h1>
+                            <div className="flex items-center gap-3 flex-wrap">
+                                <span className="text-xl text-cyan-300/90 truncate">
+                                    {shortUrl}
+                                </span>
+                                <CopyButton text={shortUrl} />
+                            </div>
 
-                            <p className="mt-2 text-sm text-zinc-500">
-                                snipppy.com/{analytics.shortCode}
+                            <p className="mt-2 text-sm text-white/50 truncate max-w-md" title={analytics.longUrl}>
+                                {analytics.longUrl}
                             </p>
                         </div>
 
-                        <div>
-                            <p className="text-sm text-zinc-500">
-                                Total clicks
-                            </p>
-
-                            <p className="mt-1 text-4xl font-semibold">
+                        <div className="shrink-0 text-center sm:text-right">
+                            <p className="text-sm text-white/50">Total clicks</p>
+                            <p className="text-4xl text-[#ff4f87]">
                                 {analytics.totalClicks}
                             </p>
                         </div>
 
                     </div>
 
-
-                    {/* Click Activity */}
-                    <section className="mt-8">
-
-                        <div className="mb-4 flex items-center justify-between">
-                            <h2 className="text-lg font-medium">
-                                Click activity
-                            </h2>
-
-                            <span className="text-xs text-zinc-500">
-                                Last 7 days
-                            </span>
-                        </div>
-
-                        <div className="h-72 rounded-2xl border border-zinc-800 bg-zinc-950 p-6">
-
-                            {/* Temporary chart */}
-                            <div className="flex h-full items-end gap-2 sm:gap-4">
-
-                                {[35, 52, 40, 75, 58, 90, 68].map(
-                                    (height, index) => (
-                                        <div
-                                            key={index}
-                                            className="flex-1 rounded-t-md bg-white/80 transition hover:bg-white"
-                                            style={{
-                                                height: `${height}%`,
-                                            }}
-                                        />
-                                    )
-                                )}
-
-                            </div>
-
-                        </div>
-                    </section>
-
-
-                    {/* Analytics breakdown */}
-                    <div className="mt-6 grid gap-6 md:grid-cols-2">
-
-                        <AnalyticsCard
-                            title="Countries"
-                            data={analytics.countries}
-                        />
-
-                        <AnalyticsCard
-                            title="Devices"
-                            data={analytics.devices}
-                        />
-
-                        <AnalyticsCard
-                            title="Referrers"
-                            data={analytics.referrers}
-                        />
-
+                    {/* Breakdown cards */}
+                    <div className="mt-6 grid gap-5 md:grid-cols-2">
+                        <AnalyticsCard title="Countries" data={analytics.countries} />
+                        <AnalyticsCard title="Devices" data={analytics.devices} />
+                        <AnalyticsCard title="Referrers" data={analytics.referrers} />
+                        <RecentClicksCard data={analytics.recentClicks} />
                     </div>
 
                 </div>
-            </main>
+            </div>
 
             {toast && (
-                <Toast
-                    toast={toast}
-                    setToast={setToast}
-                />
+                <Toast toast={toast} setToast={setToast} />
             )}
         </>
     );
 };
 
-
 const AnalyticsCard = ({ title, data }) => {
 
-    const entries = Object.entries(data || {});
-
-    const total = entries.reduce(
-        (sum, [, value]) => sum + value,
-        0
-    );
+    const entries = data || [];
+    const total = entries.reduce((sum, item) => sum + item.count, 0);
 
     return (
-        <div className="rounded-2xl border border-zinc-800 bg-zinc-950 p-6">
+        <div className="rounded-xl border border-white/10 bg-white/2 p-6">
 
-            <h2 className="mb-6 text-lg font-medium">
+            <h2 className="text-lg text-cyan-400 mb-5">
                 {title}
             </h2>
 
-            <div className="space-y-5">
+            {entries.length === 0 ? (
+                <p className="text-sm text-white/40">No data yet</p>
+            ) : (
+                <div className="space-y-4">
+                    {entries.map((item) => {
+                        const percentage = total === 0 ? 0 : Math.round((item.count / total) * 100);
 
-                {entries.map(([name, count]) => {
+                        return (
+                            <div key={item.label}>
+                                <div className="mb-1.5 flex items-center justify-between text-sm">
+                                    <span className="text-white/80">{item.label}</span>
+                                    <span className="text-white/40">{item.count} · {percentage}%</span>
+                                </div>
 
-                    const percentage =
-                        total === 0
-                            ? 0
-                            : Math.round((count / total) * 100);
-
-                    return (
-                        <div key={name}>
-
-                            <div className="mb-2 flex items-center justify-between text-sm">
-
-                                <span className="text-zinc-300">
-                                    {name}
-                                </span>
-
-                                <span className="text-zinc-500">
-                                    {count} · {percentage}%
-                                </span>
-
+                                <div className="h-1.5 overflow-hidden rounded-full bg-white/10">
+                                    <div
+                                        className="h-full rounded-full bg-[#ff4f87] transition-all"
+                                        style={{ width: `${percentage}%` }}
+                                    />
+                                </div>
                             </div>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
+    );
+};
 
-                            <div className="h-1.5 overflow-hidden rounded-full bg-zinc-800">
+const RecentClicksCard = ({ data }) => {
 
-                                <div
-                                    className="h-full rounded-full bg-white transition-all"
-                                    style={{
-                                        width: `${percentage}%`,
-                                    }}
-                                />
+    const clicks = data || [];
 
-                            </div>
+    return (
+        <div className="rounded-xl border border-white/10 bg-white/2 p-6 md:col-span-2">
 
+            <h2 className="text-lg text-cyan-400 mb-5">
+                Recent activity
+            </h2>
+
+            {clicks.length === 0 ? (
+                <p className="text-sm text-white/40">No clicks yet</p>
+            ) : (
+                <div className="space-y-3">
+                    {clicks.map((click, index) => (
+                        <div
+                            key={index}
+                            className="flex items-center justify-between text-sm border-b border-white/6 pb-3 last:border-0 last:pb-0"
+                        >
+                            <span className="text-white/70">{click.device}</span>
+                            <span className="text-white/50">{click.country}</span>
+                            <span className="text-white/50">{click.referrer}</span>
+                            <span className="text-white/30 text-xs">
+                                {new Date(click.timestamp).toLocaleString()}
+                            </span>
                         </div>
-                    );
-                })}
-
-            </div>
-
+                    ))}
+                </div>
+            )}
         </div>
     );
 };
