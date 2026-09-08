@@ -51,7 +51,7 @@ const Analytics = () => {
                     <div className="rounded-xl border border-white/10 bg-white/2 p-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
 
                         <div className="min-w-0">
-                            <h2 className="text-xs tracking-[0.2em] text-lime-400 mb-1">
+                            <h2 className="text-xl tracking-[0.2em] text-lime-400 mb-1">
                                 LINK ANALYTICS
                             </h2>
 
