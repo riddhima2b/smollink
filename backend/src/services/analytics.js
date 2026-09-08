@@ -27,54 +27,46 @@ async function getLinkStats(linkId) {
       
 async function getLinkAnalytics(linkId) {
 
-    const totalClicks = await prismaclient.primsa.click.count({ where: { linkId } });
-    
-    const countries = await prismaclient.primsa.click.groupBy({
+  const [link, totalClicks, formattedCountries, formattedDevices, formattedRefferers, formattedRecentClicks] = await Promise.all([
+    prismaclient.primsa.link.findUnique({
+      where: { id: linkId },
+      select: { shortCode: true, customSlug: true, longUrl: true },
+    }),
+    prismaclient.primsa.click.count({ where: { linkId } }),
+    prismaclient.primsa.click.groupBy({
       by: ['country'],
-      where:{linkId},
+      where: { linkId },
       _count: { country: true },
-    });
-
-    const devices = await prismaclient.primsa.click.groupBy({
+    }),
+    prismaclient.primsa.click.groupBy({
       by: ['device'],
-      where:{linkId},
+      where: { linkId },
       _count: { device: true },
-    });
-
-    const referrers = await prismaclient.primsa.click.groupBy({
+    }),
+    prismaclient.primsa.click.groupBy({
       by: ['referrer'],
-      where:{linkId},
+      where: { linkId },
       _count: { referrer: true },
-    });
-
-    const recentClicks = await prismaclient.primsa.click.findMany({
+    }),
+    prismaclient.primsa.click.findMany({
       where: { linkId },
       orderBy: { timestamp: 'desc' },
       take: 5,
-      select: {
-        timestamp: true,
-        device: true,
-        country: true,
-        referrer: true
-    }
-    });
+      select: { timestamp: true, device: true, country: true, referrer: true },
+    }),
+  ]);
 
-    const formattedCountries = countries.map(item => ({ country: item.country, count: item._count.country }));
+  if (!link) {
+    throw new Error('Link not found'); 
+  }
 
-    const formattedDevices = devices.map(item => ({ device: item.device, count: item._count.device }));
-    const formattedRefferers = referrers.map(item => ({ referrer: item.referrer, count: item._count.referrer }));
-    const formattedRecentClicks = recentClicks.map(click => ({
-      timestamp: click.timestamp,
-      device: click.device,
-      country: click.country,
-      referrer: click.referrer
-    }));
-
-    return {
-      totalClicks,
+  return {
+    shortCode: link.shortCode,
+    customSlug: link.customSlug,
+    longUrl: link.longUrl,
+    totalClicks,
       formattedCountries, 
       formattedDevices,formattedRefferers, formattedRecentClicks
     };
-
 }
 module.exports = { recordClick, getLinkStats, getLinkAnalytics };
