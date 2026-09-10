@@ -6,7 +6,7 @@ app.use(express.json());
 const PORT = process.env.B_PORT;
 const base_url = process.env.BASE_URL;
 const linkService = require('./src/services/link.service');
-const {rateLimit, authLimit} = require('./middleware/rateLimit');
+const {limiter, authLimit} = require('./middleware/rateLimit');
 const {register, login, getUserInfo, logout } = require('./src/controllers/users');
 const { shortenController, getCustomShortController, getUrlController, getLinksByUserController } = require('./src/controllers/link.service');
 const { getLinkStatsController, getAnalyticsController } = require('./src/controllers/analytics');
@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 app.post('/api/register',authLimit,register);
 app.post('/api/login', authLimit, login);
 app.get('/api/user', requireAuth, getUserInfo);
-app.post('/api/shorten', optionalAuth, rateLimit, shortenController);
+app.post('/api/shorten', optionalAuth, limiter, shortenController);
 app.get('/api/links/:id/stats', getLinkStatsController);
 app.get('/api/analytics/:id', getAnalyticsController);  
 app.get('/api/mylinks', requireAuth, getLinksByUserController); 
