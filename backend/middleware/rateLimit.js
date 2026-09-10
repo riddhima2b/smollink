@@ -10,7 +10,7 @@ const authLimiter = rateLimiter({
     windowMs: 10 * 60 * 1000, // 10 minutes
     max: 5, // Limit each IP to 5 requests per windowMs
     message: 'Too many login attempts from this IP, please try again after 10 minutes',
-    skipsuccessfulRequests: true, // Only count failed requests
+    skipSuccessfulRequests: true, // Only count failed requests
     standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
     legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
