@@ -6,4 +6,19 @@ const limiter = rateLimiter({
     message: 'Too many requests from this IP, please try again after 2 minutes',
 });
 
-module.exports = limiter;
+const authLimiter = rateLimiter({
+    windowMs: 10 * 60 * 1000, // 10 minutes
+    max: 5, // Limit each IP to 5 requests per windowMs
+    message: 'Too many login attempts from this IP, please try again after 10 minutes',
+    skipsuccessfulRequests: true, // Only count failed requests
+    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
+
+const redirectLimiter = rateLimiter({
+    windowMs: 1 * 60 * 1000, // 1 minute
+    max: 60, // generous, just to stop abuse/scraping
+    message: 'Too many requests, please slow down',
+});
+
+module.exports = {limiter, authLimiter, redirectLimiter};
