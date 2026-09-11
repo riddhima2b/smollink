@@ -115,7 +115,6 @@ const DashboardPage = () => {
                
 
             </main>
-            <footer className="absolute bottom-0 w-full text-center py-4 text-white"><a href="https://github.com/riddhima2b" target="_blank" rel="noopener noreferrer" >© Riddhima, 2026</a></footer>
             <Toast message={toast} onClose={() => setToast(null)} />
             
         </div>

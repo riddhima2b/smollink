@@ -66,9 +66,7 @@ const LandingPage = () => {
                             Psssst! Want more features? <a href="/register" className="text-pink-600 hover:underline">Sign up</a> for a free account!
                     </p>
           
-                </div>
-                <footer className="absolute bottom-0 w-full text-center py-4 text-white"><a href="https://github.com/riddhima2b" target="_blank" rel="noopener noreferrer" >© Riddhima, 2026</a></footer>
-               
+                </div>               
             </div>
         </>
     )
