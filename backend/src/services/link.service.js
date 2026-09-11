@@ -13,62 +13,56 @@ async function fetchUrl(url, slug, userId)
 
     return link;
 }
-async function createShortUrl(url,userId,customSlug) {
-
-    if(!isValidUrl(url)){
-        throw new ValidationError('Invalid URL format');
-    }
+async function createShortUrl(url, userId, customSlug) {
 
     if (!url || typeof url !== 'string') {
         throw new ValidationError('URL is required');
     }
-    
+    if (!isValidUrl(url)) {
+        throw new ValidationError('Invalid URL format');
+    }
+
     if (customSlug) {
         const slug2 = customSlug.toLowerCase();
-        if(!userId){
+
+        if (!userId) {
             throw new ValidationError('You must be logged in to create a custom slug');
         }
-        if(reserved_slugs.includes(slug2)){
+        if (reserved_slugs.includes(slug2)) {
             throw new ValidationError('This keyword is reserved');
         }
-        const existingSlug = await prismaclient.primsa.link.findUnique({where: {customSlug: slug2},});
-        if(existingSlug){
+        const clash = await prismaclient.primsa.link.findFirst({
+            where: { OR: [{ customSlug: slug2 }, { shortCode: slug2 }] },
+        });
+        if (clash) {
             throw new ValidationError('This custom keyword is already taken');
         }
 
-        const newLink = await prismaclient.primsa.link.create({
+        return await prismaclient.primsa.link.create({
             data: {
                 longUrl: url,
-                userId: userId,
-                customSlug: customSlug || null,
-                },
-            });
-            const shortUrl = Base62.encodeBase62(newLink.id);
-            return await prismaclient.primsa.link.update({
-                where: { id: newLink.id },
-                data: { shortCode: shortUrl },
-            });
+                userId,
+                customSlug: slug2,
+            },
+        });
     }
-    const existingLink = await fetchUrl(url,customSlug,userId);
-    if(existingLink) {
+
+    const existingLink = await fetchUrl(url, customSlug, userId);
+    if (existingLink) {
         return existingLink;
     }
-        
+
     const newLink = await prismaclient.primsa.link.create({
-        data: {
-            longUrl: url,
-            userId: userId,
-        },
+        data: { longUrl: url, userId },
     });
-    const shortUrl = Base62.encodeBase62(newLink.id);
+
+    const shortCode = Base62.encodeBase62(newLink.id);
 
     return await prismaclient.primsa.link.update({
-        
         where: { id: newLink.id },
-        data: { shortCode: shortUrl },
-    });    
+        data: { shortCode },
+    });
 }
-
 async function getUrl(shortCode){
 
     const link = await prismaclient.primsa.link.findUnique({
@@ -77,11 +71,10 @@ async function getUrl(shortCode){
     return link;
 }
 
-const getUrlBySlugAndCode = async (slug, shortCode) => {
-    const link = await prismaclient.primsa.link.findFirst({
+const getUrlBySlug = async (slug) => {
+    const link = await prismaclient.primsa.link.findUnique({
         where:{
             customSlug: slug,
-            shortCode,
         },
     });
     return link;
@@ -93,4 +86,4 @@ const getLinksByUserId = async (userId) => {
     })
     return links;
 }
-module.exports = {fetchUrl, createShortUrl, getUrl, getLinksByUserId, getUrlBySlugAndCode};
+module.exports = {fetchUrl, createShortUrl, getUrl, getLinksByUserId, getUrlBySlug};

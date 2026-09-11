@@ -1,29 +1,27 @@
 const { ValidationError } = require('../utils/errors');
 const {recordClick} = require('../services/analytics');
-const {createShortUrl, getUrl, getLinksByUserId, getUrlBySlugAndCode} = require('../services/link.service');
+const {createShortUrl, getUrl, getLinksByUserId, getUrlBySlug} = require('../services/link.service');
 const baseUrl = process.env.BASE_URL;
 
 const getUrlController = async (req, res) => {
-  try{
-    
-    const { shortCode } = req.params;
-    const link = await getUrl(shortCode);
+  try {
+    const { code } = req.params;
+    const link = (await getUrlBySlug(code.toLowerCase())) ?? (await getUrl(code));
 
     if (!link) {
       return res.status(404).json({ error: 'Short URL not found' });
     }
     recordClick(link.id, req).catch((err) => console.error('recordClick failed:', err));
     res.redirect(link.longUrl);
-    return; 
-  }
-  catch(error){
+    return;
+  } catch (error) {
     console.error(error);
     if (error instanceof ValidationError) {
       return res.status(400).json({ error: error.message });
     }
     return res.status(500).json({ error: 'Something went wrong' });
   }
-}
+};
 const shortenController = async (req, res) => {
     try {
       const { url, customSlug } = req.body || {};
@@ -38,7 +36,7 @@ const shortenController = async (req, res) => {
   
       return res.status(201).json({
         shortUrl: customSlug
-        ?`${baseUrl}${link.customSlug}/${link.shortCode}`
+        ?`${baseUrl}${link.customSlug}`
         :`${baseUrl}${link.shortCode}`
       });
     } catch (err) {
@@ -50,23 +48,6 @@ const shortenController = async (req, res) => {
     }
   };
 
-const getCustomShortController = async(req, res) =>{
-    try{
-          const { slug, shortCode } = req.params;
-          const link = await getUrlBySlugAndCode(slug, shortCode);
-          if (!link) return res.status(404).json({ error: 'Link not found' });
-
-          recordClick(link.id, req).catch((err) => console.error('recordClick failed:', err));
-          res.redirect(link.longUrl);
-          return; 
-    }catch(err){
-      console.error(err);
-      if (err instanceof ValidationError) {
-        return res.status(400).json({ error: err.message });
-      }
-      return res.status(500).json({ error: 'Something went wrong' });
-    }
-}
 
 const getLinksByUserController = async(req, res) =>{
     try{
@@ -87,4 +68,4 @@ const getLinksByUserController = async(req, res) =>{
 }
 
 
-module.exports = { shortenController, getCustomShortController, getLinksByUserController, getUrlController };
+module.exports = { shortenController, getLinksByUserController, getUrlController };
