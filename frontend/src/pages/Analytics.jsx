@@ -36,7 +36,7 @@ const Analytics = () => {
     }
 
     const shortUrl = analytics.customSlug
-        ? `https://www.snipppy.com/${analytics.customSlug}/${analytics.shortCode}`
+        ? `https://www.snipppy.com/${analytics.customSlug}`
         : `https://www.snipppy.com/${analytics.shortCode}`;
 
     return (

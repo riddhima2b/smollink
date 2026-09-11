@@ -74,7 +74,7 @@ const MyLinks = () => {
 
                                             <div className="text-md text-cyan-300/80">
                                             {item.customSlug
-                                                ? `https://www.snipppy.com/${item.customSlug}/${item.shortCode}`
+                                                ? `https://www.snipppy.com/${item.customSlug}`
                                                 : `https://www.snipppy.com/${item.shortCode}`}
                                             </div>
 
@@ -92,7 +92,7 @@ const MyLinks = () => {
                                             <CopyButton
                                                 text={
                                                     item.customSlug
-                                                        ? `https://www.snipppy.com/${item.customSlug}/${item.shortCode}`
+                                                        ? `https://www.snipppy.com/${item.customSlug}`
                                                         : `https://www.snipppy.com/${item.shortCode}`
                                                 }
                                             />
