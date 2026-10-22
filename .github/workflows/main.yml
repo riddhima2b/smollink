@@ -24,7 +24,6 @@ jobs:
             -o BatchMode=yes \
             -o ConnectTimeout=10 \
             -o StrictHostKeyChecking=accept-new \
-            "$EC2_USER@$EC2_HOST" true \
-            >/dev/null 2>&1
+            "$EC2_USER@$EC2_HOST" true 
             echo "SSH connection successful."
           rm -f /tmp/ec2-key.pem
