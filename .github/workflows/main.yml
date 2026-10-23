@@ -1,29 +1,14 @@
-name: Test EC2 SSH Connection
+name: CI test
 
 on:
-  workflow_dispatch:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
 
 jobs:
-  test-ssh:
+  check:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Verify EC2 SSH Connection
-        env:
-          EC2_HOST: ${{ secrets.EC2_HOST }}
-          EC2_USER: ${{ secrets.EC2_USER }}
-          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
-        run: |
-          set -eu
-          install -m 600 /dev/null /tmp/ec2-key.pem
-
-          ssh -i /tmp/ec2-key.pem \
-            -o BatchMode=yes \
-            -o ConnectTimeout=10 \
-            -o StrictHostKeyChecking=accept-new \
-            "$EC2_USER@$EC2_HOST" true 
-            echo "SSH connection successful."
-          rm -f /tmp/ec2-key.pem
+      - uses: actions/checkout@v4
+      - run: echo "CI working hai"
+      - run: ls -la
