@@ -1,14 +1,21 @@
-name: CI test
+
+name: Snipppy CI
 
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
-  check:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - run: echo "CI working hai"
-      - run: ls -la
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check Backend Syntax
+        working-directory: backend
+        run: node --check app.js
